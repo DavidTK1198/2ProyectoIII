@@ -1,4 +1,4 @@
-package chatClient;
+package Client.Presentation.login;
 
 import chatProtocol.User;
 import chatProtocol.Protocol;
@@ -119,9 +119,12 @@ public class ServiceProxy implements IService{
    private void deliver( final String  message ){
       SwingUtilities.invokeLater(new Runnable(){
             public void run(){
-               controller.deliver(message);
+//               controller.deliver(message);
             }
          }
       );
    }
 }
+
+
+

@@ -1,8 +1,20 @@
-package chatClient;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package Client.Presentation.login;
 
 import chatProtocol.User;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * 
+ *@author DavidTK1198
+ */
+
 
 public class Model extends java.util.Observable {
     User currentUser;
@@ -38,4 +50,7 @@ public class Model extends java.util.Observable {
         this.setChanged();
         this.notifyObservers();        
     } 
+
+
+
 }
