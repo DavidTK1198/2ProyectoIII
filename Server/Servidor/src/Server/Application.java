@@ -6,9 +6,11 @@ public class Application {
       
         Server server = new Server();
           System.out.println("LINK----->START");
+          //DavidRULES
         server.run();
     }
 }
+
 
 
 
