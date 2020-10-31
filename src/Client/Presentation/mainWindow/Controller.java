@@ -6,7 +6,8 @@
 package Client.Presentation.mainWindow;
 
 
-import chatProtocol.User;
+
+import Client.Logic.Contact;
 import java.util.List;
 
 /**
@@ -17,11 +18,8 @@ public class Controller {
 
     private View vista;
     private Model model;
+    private Client.Presentation.login.Controller Parent;
    
-
-  
-
- 
     public Controller(View vista, Model model) {
         this.vista = vista;
         this.model = model;
@@ -30,6 +28,15 @@ public class Controller {
 
     }
 
+    public Client.Presentation.login.Controller getParent() {
+        return Parent;
+    }
+
+    public void setParent(Client.Presentation.login.Controller Parent) {
+        this.Parent = Parent;
+    }
+
+    
     public void show() {
         vista.setVisible(true);
     }
@@ -43,13 +50,14 @@ public class Controller {
     }
 
     public void cargarTodosLosUsuarios() {
-        List<User> lp = null;
+        List<Contact> lp = null;
         model.setLista(lp);
+       
     }
     
     public void preSet(){
-        List<User> list= null;
-        model.setUser(new User());        
+        List<Contact> list= null;
+        model.setContact(new Contact());        
         model.setLista(list);        
         model.commit();
     }

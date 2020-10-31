@@ -6,15 +6,13 @@ import java.util.Objects;
 public class User implements Serializable{
     String id;
     String clave;
-    String nombre;
 
     public User() {
     }
     
-    public User(String id, String clave, String nombre) {
+    public User(String id, String clave) {
         this.id = id;
         this.clave = clave;
-        this.nombre = nombre;
     }
 
     public String getId() {
@@ -31,14 +29,6 @@ public class User implements Serializable{
 
     public void setClave(String clave) {
         this.clave = clave;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     @Override

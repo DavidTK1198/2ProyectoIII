@@ -13,6 +13,7 @@ public class Contact {
 
     private String nombre;
     private String IdC;
+    private boolean estado;
 
     public String getNombre() {
         return nombre;
@@ -38,6 +39,16 @@ public class Contact {
     public Contact() {
         this.nombre = "";
         this.IdC = "";
+        this.estado = false;
     }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+    
 
 }

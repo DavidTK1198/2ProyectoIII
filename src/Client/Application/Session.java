@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Application;
+package Client.Application;
 
 import java.util.HashMap;
 

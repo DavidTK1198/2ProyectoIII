@@ -25,21 +25,12 @@ public class Profile extends User {
         chats = new HashMap<>();
     }
 
-    public Profile(String id, String clave, String nombre) {
-        super(id, clave, nombre);
+    public Profile(String id, String clave) {
+        super(id, clave);
         contacts = new HashMap<>();
         contacts = new HashMap<>();
     }
 
-    @Override
-    public void setNombre(String nombre) {
-        super.setNombre(nombre);
-    }
-
-    @Override
-    public String getNombre() {
-        return super.getNombre();
-    }
 
     @Override
     public void setClave(String clave) {
@@ -95,7 +86,7 @@ public class Profile extends User {
             this.contacts.put(p.getIdC(), p);
 
         } else {
-            throw new Exception("El chat ya existe");
+            throw new Exception("El contacto ya existe");
         }
     }
 

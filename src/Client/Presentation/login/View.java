@@ -1,13 +1,13 @@
 package Client.Presentation.login;
 
+import Client.Logic.Profile;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
-
 /**
  *
  * @author DavidTK1198
@@ -17,13 +17,12 @@ public class View extends javax.swing.JFrame {
     /**
      * Creates new form View
      */
-    
-     private Model model;
-     private Controller control;
-    
+    private Model model;
+    private Controller control;
+
     public View() {
         initComponents();
-        
+
     }
 
     /**
@@ -70,6 +69,11 @@ public class View extends javax.swing.JFrame {
         login.setFont(new java.awt.Font("Berlin Sans FB", 0, 15)); // NOI18N
         login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Client/Icons/user.png"))); // NOI18N
         login.setText("Login");
+        login.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loginMouseClicked(evt);
+            }
+        });
 
         inpUsername.setFont(new java.awt.Font("Berlin Sans FB", 0, 15)); // NOI18N
         inpUsername.setBorder(null);
@@ -148,16 +152,33 @@ public class View extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-   
+    private void loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginMouseClicked
+        String userName = "";
+        String Password = "";
+        try {
+            if(this.inpPassword.getText().isEmpty() || this.inpPassword.getText().isEmpty()){
+                throw new Exception("Espacios incompletos");
+            }
+            userName = this.inpUsername.getText();
+            Password = this.inpPassword.getText();
+        }catch(Exception m){
+            JOptionPane.showMessageDialog(null, m.getMessage());
+             return;
+        }
+        Profile perfil = new Profile(userName,Password);
+        
+
+
+    }//GEN-LAST:event_loginMouseClicked
+
     public void setModel(Model model) {
         this.model = model;
     }
 
-   
     public void setControl(Controller control) {
         this.control = control;
     }
-   
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox chkAgree;

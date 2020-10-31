@@ -1,6 +1,7 @@
 package Server;
 
 import Server.Server;
+import Server.data.UserDao;
 import chatProtocol.User;
 import chatProtocol.IService;
 import java.util.HashMap;
@@ -16,13 +17,11 @@ public class Service implements IService{
     }
     
     Server srv;
-    Map<String,User> users;
+    UserDao users;
 
     public Service() {        
-        users =  new HashMap();
-        users.put("jperez", new User("jperez","111","Juan"));
-        users.put("mreyes", new User("mreyes","222","Maria"));
-        users.put("parias", new User("parias","333","Pedro"));                
+        users =  new UserDao();
+                       
     }
     
     public void setSever(Server srv){
@@ -35,7 +34,7 @@ public class Service implements IService{
     }
     
     public User login(User u) throws Exception{
-        User result=users.get(u.getId());
+        User result=users.read(u.getId());
         if(result==null)  throw new Exception("User does not exist");
         if(!result.getClave().equals(u.getClave()))throw new Exception("User does not exist");
         return result;

@@ -6,7 +6,7 @@
 
 package Client.Presentation.mainWindow;
 
-import chatProtocol.User;
+import Client.Logic.Contact;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -20,9 +20,9 @@ public class Model extends Observable{
     
     
     private TableModel table;
-    private User us;
+    private Contact contact;
     private int[] col = {0,1};
-    private List<User> lista;
+    private List<Contact> lista;
     private boolean editable;
     
     public void addObserver(Observer a) {
@@ -30,11 +30,8 @@ public class Model extends Observable{
         super.addObserver(a);
         refresh();
     }
-
-  
-
     public Model() {
-        us = new User();
+        
         lista = new ArrayList<>();
         table = new TableModel(lista,col);
         editable = false;
@@ -48,43 +45,46 @@ public class Model extends Observable{
         this.editable = editable;
     }
     private void refresh(){
-         us = new User();
+        this.contact = new Contact();
         this.setChanged();
         this.notifyObservers();
         
     }
+    
 
     public TableModel getTable() {
         return table;
     }
 
-    public void setTable(List<User> tablee) {
+    public void setTable(List<Contact> tablee) {
         table = new TableModel(tablee,col);
     }
 
-    public User getUser() {
-        return us;
+    public Contact getContact() {
+        return this.contact;
     }
 
-    public void setUser(User use) {
-        this.us = use;
+    public void setContact(Contact use) {
+        this.contact = use;
     }
 
-    public List<User> getLista() {
+    public List<Contact> getLista() {
         return lista;
     }
 
-    public void setLista(List<User> a) {
+    public void setLista(List<Contact> a) {
         this.lista = a;
         setTable(a);
         refresh();
     }
 
-    public User getRow(int n) {
+    public Contact getRow(int n) {
        return  table.getRowAt(n);
     }
 
     void commit() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.contact = new Contact();
+        this.setChanged();
+        this.notifyObservers();
     }
 }
