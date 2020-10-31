@@ -354,8 +354,13 @@ public class View extends javax.swing.JDialog implements Observer {
             return;
         }
         Contact contacto = new Contact(nombreContacto,cedula);
-        
-       
+        try{
+              this.control.agregarContacto(contacto);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e.getMessage());
+            return;
+        }
+
     }//GEN-LAST:event_AgrContMouseClicked
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed

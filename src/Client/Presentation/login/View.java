@@ -74,6 +74,11 @@ public class View extends javax.swing.JFrame {
                 loginMouseClicked(evt);
             }
         });
+        login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginActionPerformed(evt);
+            }
+        });
 
         inpUsername.setFont(new java.awt.Font("Berlin Sans FB", 0, 15)); // NOI18N
         inpUsername.setBorder(null);
@@ -156,20 +161,29 @@ public class View extends javax.swing.JFrame {
         String userName = "";
         String Password = "";
         try {
-            if(this.inpPassword.getText().isEmpty() || this.inpPassword.getText().isEmpty()){
+            if (this.inpPassword.getText().isEmpty() || this.inpPassword.getText().isEmpty()) {
                 throw new Exception("Espacios incompletos");
             }
             userName = this.inpUsername.getText();
             Password = this.inpPassword.getText();
-        }catch(Exception m){
+        } catch (Exception m) {
             JOptionPane.showMessageDialog(null, m.getMessage());
-             return;
+            return;
         }
-        Profile perfil = new Profile(userName,Password);
-        
+        Profile perfil = new Profile(userName, Password);
+        try {
+            this.control.login(perfil);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return;
+        }
 
 
     }//GEN-LAST:event_loginMouseClicked
+
+    private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_loginActionPerformed
 
     public void setModel(Model model) {
         this.model = model;

@@ -17,8 +17,7 @@ public class Controller {
     ServiceProxy localService;
     private View vista;
     private Model model;
-    private User usuario;
-    private Profile perfil;
+ 
     Client.Presentation.mainWindow.Model main_model;
     Client.Presentation.mainWindow.View main_Vista;
     Client.Presentation.mainWindow.Controller main_control;
@@ -26,13 +25,16 @@ public class Controller {
     public Controller(View vista, Model model) {
         this.vista = vista;
         this.model = model;
-        this.usuario = new User();
-        this.perfil = new Profile();
         vista.setControl(this);
         vista.setModel(model);
         initOptions();
 
     }
+
+    public Profile getProfile() {
+        return model.getPerfil();
+    }
+    
 
     public void initOptions() {
         this.main_model = new Client.Presentation.mainWindow.Model();
@@ -54,23 +56,6 @@ public class Controller {
 
     }
 
-    public User getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(User usuario) {
-        this.usuario = usuario;
-    }
-
-    public Profile getPerfil() {
-        return perfil;
-    }
-
-    public void setPerfil(Profile perfil) {
-        this.perfil = perfil;
-    }
-    
-
     public void Chat_Close() {
      
     }
@@ -87,10 +72,17 @@ public class Controller {
         this.vista.setVisible(false);
     }
     
-    public void login() throws Exception{
-        User u = new User(view.id.getText(),new String(view.clave.getPassword()),"");
-        User logged=ServiceProxy.instance().login(u);
+    public void login(Profile profi) throws Exception{
+        
+        User nuevoUsuario = (User)profi;
+//        nuevoUsuario.setClave(profi.getClave());
+//        nuevoUsuario.setId(profi.getId());
+        User logged = ServiceProxy.instance().login(nuevoUsuario);
         model.setCurrentUser(logged);
+        model.setPerfil(profi);
+        this.localService.login(nuevoUsuario);
+        this.MainShow();
+        this.Hide();
         model.commit();
     }
     public void post(){

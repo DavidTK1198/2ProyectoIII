@@ -6,6 +6,7 @@
 
 package Client.Presentation.login;
 
+import Client.Logic.Profile;
 import chatProtocol.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,15 +20,26 @@ import java.util.List;
 public class Model extends java.util.Observable {
     User currentUser;
     List<String> messages;
+    private Profile perfil;
 
     public Model() {
        currentUser = null;
        messages=new ArrayList<>();
+       perfil = new Profile();
     }
 
     public User getCurrentUser() {
         return currentUser;
     }
+
+    public Profile getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Profile perfil) {
+        this.perfil = perfil;
+    }
+    
 
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;

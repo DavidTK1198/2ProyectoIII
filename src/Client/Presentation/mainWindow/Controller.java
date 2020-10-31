@@ -8,6 +8,7 @@ package Client.Presentation.mainWindow;
 
 
 import Client.Logic.Contact;
+import Client.Logic.Profile;
 import java.util.List;
 
 /**
@@ -49,19 +50,17 @@ public class Controller {
 
     }
 
-    public void cargarTodosLosUsuarios() {
-        List<Contact> lp = null;
-        model.setLista(lp);
-       
-    }
     
     public void preSet(){
-        List<Contact> list= null;
+        Profile perfil = this.Parent.getProfile();
+        List<Contact> list= perfil.getContact();
         model.setContact(new Contact());        
         model.setLista(list);        
         model.commit();
     }
-    
-   
+    public void agregarContacto(Contact c)throws Exception{
+        Profile perfilito = this.Parent.getProfile();
+        perfilito.addContact(c);
+    }
 
 }

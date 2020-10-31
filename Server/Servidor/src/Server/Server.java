@@ -12,6 +12,7 @@ import chatProtocol.User;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Collections;
+import javax.swing.JOptionPane;
 
 public class Server {
     ServerSocket srv;
@@ -20,9 +21,11 @@ public class Server {
     public Server() {
         try {
             srv = new ServerSocket(Protocol.PORT);
-            workers =  Collections.synchronizedList(new ArrayList<Worker>());
+            workers = Collections.synchronizedList(new ArrayList<Worker>());
         } 
-        catch (IOException ex) {}
+        catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, ex.getCause());
+        }
     }
     
     public void run(){
