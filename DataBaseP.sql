@@ -6,9 +6,9 @@ CREATE DATABASE DataBaseP;
 create table Usuario (
        id  varchar(10)  not null,
        clave varchar(10) not null,
-       estado boolean false,
+	   nombre varchar(10) not null,
        Primary Key (id)         
      );
-insert into Usuario (id,clave,estado) values ('111','111',false);
+insert into Usuario (id,clave,nombre) values ('111','111','pepito');
 use DataBaseP;
 

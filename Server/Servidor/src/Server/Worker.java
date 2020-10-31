@@ -1,4 +1,4 @@
-package chatServer;
+package Server;
 
 import chatProtocol.User;
 import chatProtocol.Protocol;
@@ -77,3 +77,4 @@ public class Worker {
         catch (IOException ex) {}
     }
 }
+

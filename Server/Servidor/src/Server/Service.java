@@ -1,5 +1,6 @@
-package chatServer;
+package Server;
 
+import Server.Server;
 import chatProtocol.User;
 import chatProtocol.IService;
 import java.util.HashMap;
@@ -44,3 +45,4 @@ public class Service implements IService{
         srv.remove(p);
     }    
 }
+
