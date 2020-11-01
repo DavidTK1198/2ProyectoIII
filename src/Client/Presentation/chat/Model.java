@@ -6,6 +6,9 @@
 
 package Client.Presentation.chat;
 
+import Client.Logic.Chat;
+import chatProtocol.Message;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -14,6 +17,11 @@ import java.util.Observer;
  * @author DavidTK1198
  */
 public class Model extends Observable {
+    
+    List<Message> messages;;
+    Chat nuevoChat;
+    Message mensaje;
+    @Override
       public void addObserver(Observer a) {
        
         super.addObserver(a);
@@ -24,7 +32,29 @@ public class Model extends Observable {
         this.notifyObservers();
         
     }
+       public Chat getNuevoChat() {
+        return nuevoChat;
+    }
+
+    public void setNuevoChat(Chat nuevoChat) {
+        this.nuevoChat = nuevoChat;
+    }
+
+    public Message getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(Message mensaje) {
+        this.mensaje = mensaje;
+    }
     
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
       
     void commit() {
         this.setChanged();

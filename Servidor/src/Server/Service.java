@@ -4,6 +4,7 @@ import Server.data.UserDao;
 import chatProtocol.User;
 import chatProtocol.IService;
 import chatProtocol.Message;
+import java.util.List;
 
 public class Service implements IService{
     private static IService theInstance;
@@ -40,8 +41,13 @@ public class Service implements IService{
 
     public void logout(User p) throws Exception{
         srv.remove(p);
+    }
+
+  public List<User> update(List<User> us) throws Exception{
+        return null;
     }    
 }
+
 
 
 

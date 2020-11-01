@@ -7,6 +7,7 @@ package Client.Presentation.mainWindow;
 
 
 
+import Client.Application.Session;
 import Client.Logic.Contact;
 import Client.Logic.Profile;
 import java.util.List;
@@ -27,6 +28,8 @@ public class Controller {
         this.model = model;
         vista.setControl(this);
         vista.setModel(model);
+        Refresher refresh = new Refresher(this);
+        refresh.start();
         
 
     }
@@ -62,7 +65,7 @@ public class Controller {
     }
     
     public void preSet(){
-        Profile perfil = this.Parent.getProfile();
+        Profile perfil = (Profile) Session.instance().getAttribute(Session.USER_ATTRIBUTE);
         model.setCurrent(perfil);
         List<Contact> list= perfil.getContact();
         model.setContact(new Contact());        
@@ -70,12 +73,22 @@ public class Controller {
         model.commit();
     }
     public void agregarContacto(Contact c)throws Exception{
-        Profile perfilito = this.Parent.getProfile();
+        Profile perfilito = (Profile) Session.instance().getAttribute(Session.USER_ATTRIBUTE);
         perfilito.addContact(c);
         model.setLista(model.getProfile().getContact());
     }
 
+    void Update() {
+        //metodo para refrescar las tablas
+        
+    }
+
 }
+
+
+
+
+
 
 
 

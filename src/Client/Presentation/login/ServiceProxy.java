@@ -1,5 +1,6 @@
 package Client.Presentation.login;
 
+import Client.Presentation.login.Controller;
 import chatProtocol.User;
 import chatProtocol.Protocol;
 import chatProtocol.Message;
@@ -10,6 +11,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import javax.swing.SwingUtilities;
 import chatProtocol.IService;
+import java.util.List;
 
 public class ServiceProxy implements IService{
     private static IService theInstance;
@@ -117,6 +119,9 @@ public class ServiceProxy implements IService{
             }                        
         }
     }
+    public List<User> update(List<User> us) throws Exception{
+        return null;
+    }
     
    private void deliver( final Message  message ){
       SwingUtilities.invokeLater(new Runnable(){
@@ -127,5 +132,9 @@ public class ServiceProxy implements IService{
       );
    }
 }
+
+
+
+
 
 
