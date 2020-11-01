@@ -43,7 +43,8 @@ public class Service implements IService{
         srv.remove(p);
     }
 
-  public List<User> update(List<User> us) throws Exception{
+    public List<User> update(List<User> us) throws Exception{
+        
         return null;
     }    
 }

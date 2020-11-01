@@ -17,11 +17,13 @@ public class Server {
 
     ServerSocket srv;
     List<Worker> workers;
+    List<User> conectados;
 
     public Server() {
         try {
             srv = new ServerSocket(Protocol.PORT);
             workers = Collections.synchronizedList(new ArrayList<Worker>());
+            conectados = new ArrayList<>();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex.getCause());
         }
@@ -37,19 +39,46 @@ public class Server {
                 ObjectInputStream in = new ObjectInputStream(skt.getInputStream());
                 ObjectOutputStream out = new ObjectOutputStream(skt.getOutputStream());
                 try {
-                    int method = in.readInt(); // should be Protocol.LOGIN                    
-                    User user = (User) in.readObject();
-                    try {
-                        user = Service.instance().login(user);
-                        out.writeInt(Protocol.ERROR_NO_ERROR);
-                        out.writeObject(user);
-                        out.flush();
-                        Worker worker = new Worker(skt, in, out, user);
-                        workers.add(worker);
-                        worker.start();
-                    } catch (Exception ex) {
-                        out.writeInt(Protocol.ERROR_LOGIN);
-                        out.flush();
+                    int method = in.readInt(); // should be Protocol.LOGIN
+                    switch (method) {
+                        case 1: {
+                            User user = (User) in.readObject();
+                            try {
+                                user = Service.instance().login(user);
+                                out.writeInt(Protocol.ERROR_NO_ERROR);
+                                out.writeObject(user);
+                                out.flush();
+                                Worker worker = new Worker(skt, in, out, user);
+                                workers.add(worker);
+                                worker.start();
+                            } catch (Exception ex) {
+                                out.writeInt(Protocol.ERROR_LOGIN);
+                                out.flush();
+                            }
+                        }
+                        break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            List<User> lu = (List<User>) in.readObject();
+                            try{
+                                for(int i=0; i<lu.size();i++){
+                                    User conec = lu.get(i);
+                                    this.usuariosConectados(conec);
+                                }
+                                out.writeInt(Protocol.ERROR_NO_ERROR);
+                                out.writeObject(conectados);
+                                out.flush();
+                                conectados = new ArrayList<>();
+                                
+                                
+                            }catch(Exception ex){
+                                out.writeInt(Protocol.ERROR_UPDATE);
+                                out.flush();
+                            }
+                        
                     }
                 } catch (ClassNotFoundException ex) {
                     System.out.println("hoola");
@@ -82,6 +111,16 @@ public class Server {
             }
         }
     }
+      public void usuariosConectados(User usuario)throws Exception{
+          if(workers.size() == 1){
+              return;
+          }
+          for(int i=0; i<this.workers.size(); i++){
+              if(usuario.getId().equals(workers.get(i).getUser().getId())){
+                  conectados.add(usuario);
+              }
+          }
+         
+    }
 
 }
-

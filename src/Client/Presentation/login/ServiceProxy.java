@@ -120,7 +120,24 @@ public class ServiceProxy implements IService{
         }
     }
     public List<User> update(List<User> us) throws Exception{
-        return null;
+         connect();
+        try {
+            out.writeInt(Protocol.UPDATE);
+            out.writeObject(us);
+            out.flush();
+            int response = in.readInt();
+            if (response==Protocol.ERROR_NO_ERROR){
+                List<User> lu= (List<User>) in.readObject();
+                this.start();
+                return lu;
+            }
+            else {
+                disconnect();
+                throw new Exception("No remote users online");
+            }            
+        } catch (IOException | ClassNotFoundException ex) {
+            return null;
+        }
     }
     
    private void deliver( final Message  message ){

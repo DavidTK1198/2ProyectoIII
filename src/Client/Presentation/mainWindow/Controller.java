@@ -78,7 +78,7 @@ public class Controller {
         model.setLista(model.getProfile().getContact());
     }
 
-    void Update() {
+    public void Update() {
         //metodo para refrescar las tablas
         
     }
