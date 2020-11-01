@@ -112,32 +112,33 @@ public class ServiceProxy implements IService{
                     } 
                     catch (ClassNotFoundException ex) {}
                     break;
+                case Protocol.UPDATE:
+                    
                 }
+                
+                
                 out.flush();
             } catch (IOException  ex) {
                 continuar = false;
             }                        
         }
     }
-    public List<User> update(List<User> us) throws Exception{
-         connect();
-        try {
+    public void update(final List<User> us) throws Exception{
+          SwingUtilities.invokeLater(new Runnable(){
+            public void run(){
+               controller.setUsers(us);
+            }
+         }
+      );
+    }
+    public void send(List<User> us){
+          try {
             out.writeInt(Protocol.UPDATE);
             out.writeObject(us);
             out.flush();
-            int response = in.readInt();
-            if (response==Protocol.ERROR_NO_ERROR){
-                List<User> lu= (List<User>) in.readObject();
-                this.start();
-                return lu;
-            }
-            else {
-                disconnect();
-                throw new Exception("No remote users online");
-            }            
-        } catch (IOException | ClassNotFoundException ex) {
-            return null;
-        }
+          }catch(IOException Ex){
+              
+          }
     }
     
    private void deliver( final Message  message ){

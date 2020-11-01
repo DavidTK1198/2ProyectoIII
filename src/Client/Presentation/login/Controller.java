@@ -98,6 +98,9 @@ public class Controller {
         model.setUsers(nueva);
     }
 
+    public void setUsers(List<User> s){
+        model.setUsers(s);
+    }
     public void logout() {
         try {
             ServiceProxy.instance().logout(model.getCurrentUser());

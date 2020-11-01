@@ -71,6 +71,7 @@ public class Server {
                                 out.writeInt(Protocol.ERROR_NO_ERROR);
                                 out.writeObject(conectados);
                                 out.flush();
+                              
                                 conectados = new ArrayList<>();
                                 
                                 

@@ -39,7 +39,7 @@ public class View extends javax.swing.JFrame implements Observer {
         jPanel1 = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Registrarse = new javax.swing.JButton();
         chkAgree = new javax.swing.JCheckBox();
         inpPassword = new javax.swing.JPasswordField();
         jSeparator1 = new javax.swing.JSeparator();
@@ -58,9 +58,14 @@ public class View extends javax.swing.JFrame implements Observer {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Username");
 
-        jButton1.setFont(new java.awt.Font("Berlin Sans FB", 0, 15)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Client/Icons/add-people-interface-symbol-of-black-person-close-up-with-plus-sign-in-small-circle.png"))); // NOI18N
-        jButton1.setText("Sign up");
+        Registrarse.setFont(new java.awt.Font("Berlin Sans FB", 0, 15)); // NOI18N
+        Registrarse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Client/Icons/add-people-interface-symbol-of-black-person-close-up-with-plus-sign-in-small-circle.png"))); // NOI18N
+        Registrarse.setText("Sign up");
+        Registrarse.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RegistrarseMouseClicked(evt);
+            }
+        });
 
         chkAgree.setFont(new java.awt.Font("Berlin Sans FB", 0, 15)); // NOI18N
         chkAgree.setText("I agree to the terms and conditions");
@@ -107,7 +112,7 @@ public class View extends javax.swing.JFrame implements Observer {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(71, 71, 71)
-                        .addComponent(jButton1))
+                        .addComponent(Registrarse))
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -122,7 +127,7 @@ public class View extends javax.swing.JFrame implements Observer {
                         .addGap(78, 78, 78)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(login)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Registrarse))
                         .addGap(61, 61, 61)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(23, 23, 23)
@@ -190,6 +195,10 @@ public class View extends javax.swing.JFrame implements Observer {
         // TODO add your handling code here:
     }//GEN-LAST:event_loginActionPerformed
 
+    private void RegistrarseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarseMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RegistrarseMouseClicked
+
     public void setModel(Model model) {
         this.model = model;
         model.addObserver(this);
@@ -201,10 +210,10 @@ public class View extends javax.swing.JFrame implements Observer {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Registrarse;
     private javax.swing.JCheckBox chkAgree;
     private javax.swing.JPasswordField inpPassword;
     private javax.swing.JTextField inpUsername;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;

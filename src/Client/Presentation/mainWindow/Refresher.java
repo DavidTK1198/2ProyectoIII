@@ -29,7 +29,7 @@ public class Refresher {
             public void run() {
                 while (condition) {
                     try {
-                        Thread.sleep(3000);
+                        Thread.sleep(10000);
                     } catch (InterruptedException ex) {
                     }
                     update();
