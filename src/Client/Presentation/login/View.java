@@ -1,6 +1,8 @@
 package Client.Presentation.login;
 
 import Client.Logic.Profile;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JOptionPane;
 
 /*
@@ -12,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author DavidTK1198
  */
-public class View extends javax.swing.JFrame {
+public class View extends javax.swing.JFrame implements Observer {
 
     /**
      * Creates new form View
@@ -173,8 +175,11 @@ public class View extends javax.swing.JFrame {
         Profile perfil = new Profile(userName, Password);
         try {
             this.control.login(perfil);
+            this.inpPassword.setText("");
+            this.inpUsername.setText("");
+       
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, "cualquuiercosa");
             return;
         }
 
@@ -187,6 +192,7 @@ public class View extends javax.swing.JFrame {
 
     public void setModel(Model model) {
         this.model = model;
+        model.addObserver(this);
     }
 
     public void setControl(Controller control) {
@@ -207,4 +213,9 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JButton login;
     private javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+       
+    }
 }

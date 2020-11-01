@@ -6,7 +6,9 @@
 
 package Client.Presentation.login;
 
+import Client.Logic.Chat;
 import Client.Logic.Profile;
+import chatProtocol.Message;
 import chatProtocol.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +21,10 @@ import java.util.List;
 
 public class Model extends java.util.Observable {
     User currentUser;
-    List<String> messages;
+    List<Message> messages;
     private Profile perfil;
+    Chat nuevoChat;
+    Message mensaje;
 
     public Model() {
        currentUser = null;
@@ -39,17 +43,33 @@ public class Model extends java.util.Observable {
     public void setPerfil(Profile perfil) {
         this.perfil = perfil;
     }
+
+    public Chat getNuevoChat() {
+        return nuevoChat;
+    }
+
+    public void setNuevoChat(Chat nuevoChat) {
+        this.nuevoChat = nuevoChat;
+    }
+
+    public Message getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(Message mensaje) {
+        this.mensaje = mensaje;
+    }
     
 
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
     }
 
-    public List<String> getMessages() {
+    public List<Message> getMessages() {
         return messages;
     }
 
-    public void setMessages(List<String> messages) {
+    public void setMessages(List<Message> messages) {
         this.messages = messages;
     }
 
@@ -66,3 +86,5 @@ public class Model extends java.util.Observable {
 
 
 }
+
+

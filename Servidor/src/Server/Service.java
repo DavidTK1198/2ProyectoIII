@@ -1,11 +1,9 @@
 package Server;
 
-import Server.Server;
 import Server.data.UserDao;
 import chatProtocol.User;
 import chatProtocol.IService;
-import java.util.HashMap;
-import java.util.Map;
+import chatProtocol.Message;
 
 public class Service implements IService{
     private static IService theInstance;
@@ -28,7 +26,7 @@ public class Service implements IService{
         this.srv=srv;
     }
     
-    public void post(String m){
+    public void post(Message m){
         srv.deliver(m);
         // TODO if the receiver is not active, store it temporarily
     }
@@ -44,4 +42,6 @@ public class Service implements IService{
         srv.remove(p);
     }    
 }
+
+
 

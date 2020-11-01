@@ -28,7 +28,7 @@ public class Profile extends User {
     public Profile(String id, String clave) {
         super(id, clave);
         contacts = new HashMap<>();
-        contacts = new HashMap<>();
+        chats = new HashMap<>();
     }
 
 
@@ -91,3 +91,4 @@ public class Profile extends User {
     }
 
 }
+

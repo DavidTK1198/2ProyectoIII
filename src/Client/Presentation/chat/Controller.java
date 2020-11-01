@@ -3,21 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Client.Presentation.mainWindow;
 
-
-
-import Client.Logic.Contact;
-import Client.Logic.Profile;
-import java.util.List;
+package Client.Presentation.chat;
 
 /**
- *
+ * 
  * @author DavidTK1198
  */
 public class Controller {
 
-    private View vista;
+     private View vista;
     private Model model;
     private Client.Presentation.login.Controller Parent;
     
@@ -40,7 +35,6 @@ public class Controller {
     }
     
     public void show() {
-        this.preSet();
         vista.setVisible(true);
         
     }
@@ -53,34 +47,6 @@ public class Controller {
 
     }
 
-    String getUser(){
-       
-        return model.getProfile().getId();
-    }
-      String getEstado(){
-        return "Online";
-    }
     
-    public void preSet(){
-        Profile perfil = this.Parent.getProfile();
-        model.setCurrent(perfil);
-        List<Contact> list= perfil.getContact();
-        model.setContact(new Contact());        
-        model.setLista(list);        
-        model.commit();
-    }
-    public void agregarContacto(Contact c)throws Exception{
-        Profile perfilito = this.Parent.getProfile();
-        perfilito.addContact(c);
-        model.setLista(model.getProfile().getContact());
-    }
-
+    
 }
-
-
-
-
-
-
-
-

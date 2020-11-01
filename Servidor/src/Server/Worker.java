@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import chatProtocol.IService;
+import chatProtocol.Message;
 import java.net.Socket;
 
 public class Worker {
@@ -20,6 +21,16 @@ public class Worker {
         this.out=out;
         this.user=user;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
+    
 
     boolean continuar;    
     public void start(){
@@ -54,10 +65,10 @@ public class Worker {
                     stop();
                     break;                 
                 case Protocol.POST:
-                    String message=null;
+                    Message message=null;
                     try {
-                        message = (String)in.readObject();
-                        Service.instance().post(user.getId()+": "+message);
+                        message = (Message) in.readObject();
+                        Service.instance().post(message);
                     } catch (ClassNotFoundException ex) {}
                     break;                     
                 }
@@ -68,7 +79,7 @@ public class Worker {
         }
     }
     
-    public void deliver(String message){
+    public void deliver(Message message){
         try {
             out.writeInt(Protocol.DELIVER);
             out.writeObject(message);
@@ -77,4 +88,7 @@ public class Worker {
         catch (IOException ex) {}
     }
 }
+
+
+
 

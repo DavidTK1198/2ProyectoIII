@@ -8,6 +8,8 @@ public class User implements Serializable{
     String clave;
 
     public User() {
+        this.clave="";
+        this.id="";
     }
     
     public User(String id, String clave) {
@@ -57,3 +59,4 @@ public class User implements Serializable{
     }
     
 }
+

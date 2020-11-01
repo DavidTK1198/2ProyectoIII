@@ -2,6 +2,8 @@ package Client.Presentation.login;
 
 import chatProtocol.User;
 import chatProtocol.Protocol;
+import chatProtocol.Message;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -71,7 +73,7 @@ public class ServiceProxy implements IService{
         this.disconnect();
     }
     
-    public void post(String message){
+    public void post(Message message){
         try {
             out.writeInt(Protocol.POST);
             out.writeObject(message);
@@ -103,7 +105,7 @@ public class ServiceProxy implements IService{
                 switch(method){
                 case Protocol.DELIVER:
                     try {
-                        String message=(String)in.readObject();
+                        Message message=(Message)in.readObject();
                         deliver(message);
                     } 
                     catch (ClassNotFoundException ex) {}
@@ -116,15 +118,14 @@ public class ServiceProxy implements IService{
         }
     }
     
-   private void deliver( final String  message ){
+   private void deliver( final Message  message ){
       SwingUtilities.invokeLater(new Runnable(){
             public void run(){
-//               controller.deliver(message);
+               controller.deliver(message);
             }
          }
       );
    }
 }
-
 
 

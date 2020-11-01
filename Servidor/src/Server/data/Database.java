@@ -30,7 +30,7 @@ public class Database {
         }
         return theInstance;
     }
-    public static final String PROPERTIES_FILE_NAME="db.properties";        
+    public static final String PROPERTIES_FILE_NAME="/db.properties";        
     Connection cnx;
     public Database(){
         cnx=this.getConnection();            
@@ -78,3 +78,4 @@ public class Database {
         return null;
     }    
 }
+

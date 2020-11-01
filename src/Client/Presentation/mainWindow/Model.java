@@ -7,6 +7,7 @@
 package Client.Presentation.mainWindow;
 
 import Client.Logic.Contact;
+import Client.Logic.Profile;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -24,6 +25,7 @@ public class Model extends Observable{
     private int[] col = {0,1};
     private List<Contact> lista;
     private boolean editable;
+    Profile current= new Profile();
     
     public void addObserver(Observer a) {
        
@@ -87,4 +89,17 @@ public class Model extends Observable{
         this.setChanged();
         this.notifyObservers();
     }
+
+    Profile getProfile() {
+        return current;
+    }
+
+    public void setCurrent(Profile current) {
+        this.current = current;
+    }
+    
+    
 }
+
+
+
