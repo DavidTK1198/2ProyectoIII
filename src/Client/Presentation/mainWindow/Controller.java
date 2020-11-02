@@ -21,6 +21,7 @@ public class Controller {
     private View vista;
     private Model model;
     private Client.Presentation.login.Controller Parent;
+    private Client.Presentation.chat.Controller ChatControl;
     private Refresher refresh;
 
     public Controller(View vista, Model model) {
@@ -39,6 +40,7 @@ public class Controller {
     public void setParent(Client.Presentation.login.Controller Parent) {
         this.Parent = Parent;
     }
+    
 
     public void show() {
         this.preSet();
@@ -79,8 +81,16 @@ public class Controller {
         model.setLista(model.getProfile().getContact());
     }
     
-    void logout(){
+    public void logout(){
         this.Parent.logout();
+    }
+    public void chatLogOut(){
+        this.ChatControl.hide();
+    }
+    
+    public void showChat(){
+        this.ChatControl.show();
+       
     }
 
     public void Update() {
@@ -103,6 +113,10 @@ public class Controller {
             model.commit();
         }
 
+    }
+
+    public void whatever(Contact contacto) {
+        this.Parent.setCurrentContact(contacto);
     }
 
 }

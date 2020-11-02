@@ -47,7 +47,7 @@ public class View extends javax.swing.JDialog implements Observer  {
         jTextArea1 = new javax.swing.JTextArea();
         mensaje = new javax.swing.JTextField();
         enviar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        NombreC = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
@@ -59,7 +59,7 @@ public class View extends javax.swing.JDialog implements Observer  {
 
         enviar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Client/Icons/icons8-email-send-30.png"))); // NOI18N
 
-        jLabel1.setText("Nombre del contacto");
+        NombreC.setText("Nombre del contacto");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Client/Icons/icono_chat.png"))); // NOI18N
 
@@ -71,7 +71,7 @@ public class View extends javax.swing.JDialog implements Observer  {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
-                        .addComponent(jLabel1))
+                        .addComponent(NombreC))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -84,13 +84,13 @@ public class View extends javax.swing.JDialog implements Observer  {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(38, 38, 38)
                                 .addComponent(jLabel2)))))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(11, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(NombreC)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -126,7 +126,7 @@ public class View extends javax.swing.JDialog implements Observer  {
 
     @Override
     public void update(Observable o, Object arg) {
-        
+        this.NombreC.setText(model.nombrePersona);
     }
 
     /**
@@ -135,8 +135,8 @@ public class View extends javax.swing.JDialog implements Observer  {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel NombreC;
     private javax.swing.JButton enviar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

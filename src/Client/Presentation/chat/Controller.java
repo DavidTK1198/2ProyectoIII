@@ -5,7 +5,12 @@
  */
 package Client.Presentation.chat;
 
+import Client.Application.Session;
+import Client.Logic.Chat;
+import Client.Logic.Contact;
+import Client.Logic.Profile;
 import chatProtocol.Message;
+import java.util.List;
 
 /**
  *
@@ -45,12 +50,25 @@ public class Controller {
     }
 
     public void buscarPorID(String ced) {
-
+        
     }
 
     public void deliver(Message message) {
         model.getMessages().add(message);
         model.commit();
     }
-
+    public void setCurrentContact(Contact c){
+        Profile profi = (Profile) Session.instance().getAttribute(Session.USER_ATTRIBUTE);
+        List<Chat> lc = profi.getChat();
+        for(int i=0; i<lc.size(); i++){
+            if(lc.get(i).getIdContacto().equals(c.getIdC())){
+                model.setMessages(lc.get(i).getMensajes());
+                model.setContacto(c.getNombre());
+            }
+        }
+        
+        model.commit();
+        
+        
+    }
 }

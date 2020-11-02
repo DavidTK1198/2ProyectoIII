@@ -58,7 +58,7 @@ public class View extends javax.swing.JDialog implements Observer {
         jPanel7 = new javax.swing.JPanel();
         contactos = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TContacts = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         AgrCont = new javax.swing.JButton();
@@ -122,7 +122,7 @@ public class View extends javax.swing.JDialog implements Observer {
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TContacts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -133,9 +133,14 @@ public class View extends javax.swing.JDialog implements Observer {
                 ""
             }
         ));
-        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
-        jTable1.setRowHeight(22);
-        jScrollPane1.setViewportView(jTable1);
+        TContacts.setGridColor(new java.awt.Color(255, 255, 255));
+        TContacts.setRowHeight(22);
+        TContacts.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TContactsMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(TContacts);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -378,6 +383,20 @@ public class View extends javax.swing.JDialog implements Observer {
         this.control.logout();
     }//GEN-LAST:event_salirMouseClicked
 
+    private void TContactsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TContactsMouseClicked
+       
+        int numero = this.TContacts.getSelectedRow();
+        if(numero>-1){
+            Contact contacto = model.getTable().getRowAt(numero);
+            control.whatever(contacto);
+            control.showChat();
+            
+            
+        }
+        
+        
+    }//GEN-LAST:event_TContactsMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -386,6 +405,7 @@ public class View extends javax.swing.JDialog implements Observer {
     private javax.swing.JButton AgrCont;
     private javax.swing.JTextField IDCont;
     private javax.swing.JTextField NomC;
+    private javax.swing.JTable TContacts;
     private javax.swing.JLabel contactos;
     private javax.swing.JLabel dia;
     private javax.swing.JButton jButton1;
@@ -403,7 +423,6 @@ public class View extends javax.swing.JDialog implements Observer {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton salir;
     // End of variables declaration//GEN-END:variables
@@ -412,7 +431,7 @@ public class View extends javax.swing.JDialog implements Observer {
     public void update(Observable o, Object arg) {
         this.jLabel2.setText(control.getUser());
         this.jLabel11.setText(control.getEstado());
-        this.jTable1.setModel(model.getTable());
+        this.TContacts.setModel(model.getTable());
          Date date = new Date();
        this.dia.setText(new SimpleDateFormat("dd/MM/yyyy").format(date) );
     }

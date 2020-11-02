@@ -6,6 +6,7 @@
 package Client.Presentation.login;
 
 import Client.Application.Session;
+import Client.Logic.Contact;
 import Client.Logic.Profile;
 import chatProtocol.Message;
 import chatProtocol.User;
@@ -39,12 +40,12 @@ public class Controller {
     }
 
     public void initOptions() {
+         this.Chat_model = new Client.Presentation.chat.Model();
+        this.Chat_Vista = new Client.Presentation.chat.View(this.vista, true);
+        this.Chat_control = new Client.Presentation.chat.Controller(this.Chat_Vista, this.Chat_model);
         this.main_model = new Client.Presentation.mainWindow.Model();
         this.main_Vista = new Client.Presentation.mainWindow.View(this.vista, true);
         this.main_control = new Client.Presentation.mainWindow.Controller(this.main_Vista, this.main_model);
-        this.Chat_model = new Client.Presentation.chat.Model();
-        this.Chat_Vista = new Client.Presentation.chat.View(this.vista, true);
-        this.Chat_control = new Client.Presentation.chat.Controller(this.Chat_Vista, this.Chat_model);
         this.Chat_control.setParent(this);
         this.main_control.setParent(this);
         localService = (ServiceProxy) ServiceProxy.instance();
@@ -128,13 +129,17 @@ public class Controller {
         return model.getUsers();
     }
     
-    void deliver(Message message) {
+    public void deliver(Message message) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    void setUsers(List<User> us) {
+    public void setUsers(List<User> us) {
         model.setUsers(us);
     }
+    public void setCurrentContact(Contact cont){
+        this.Chat_control.setCurrentContact(cont);
+    }
+    
 
 }
 
