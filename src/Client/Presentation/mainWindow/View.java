@@ -268,6 +268,11 @@ public class View extends javax.swing.JDialog implements Observer {
 
         salir.setBackground(new java.awt.Color(0, 102, 153));
         salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Client/Icons/icons8-power-off-button-50.png"))); // NOI18N
+        salir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                salirMouseClicked(evt);
+            }
+        });
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Client/Icons/icono_chat.png"))); // NOI18N
 
@@ -367,6 +372,11 @@ public class View extends javax.swing.JDialog implements Observer {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void salirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirMouseClicked
+        // TODO add your handling code here:
+        this.control.logout();
+    }//GEN-LAST:event_salirMouseClicked
 
     /**
      * @param args the command line arguments

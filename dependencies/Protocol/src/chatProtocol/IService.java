@@ -6,7 +6,8 @@ public interface IService {
     public User login(User u) throws Exception;
     public void logout(User u) throws Exception; 
     public void post(Message message);
-    public List<User> update(List<User> us) throws Exception;
+    public void update(List<User> us) throws Exception;
 }
+
 
 

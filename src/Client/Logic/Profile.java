@@ -31,7 +31,6 @@ public class Profile extends User {
         chats = new HashMap<>();
     }
 
-
     @Override
     public void setClave(String clave) {
         super.setClave(clave);
@@ -90,5 +89,14 @@ public class Profile extends User {
         }
     }
 
-}
+    public Contact getContacto(String ps) throws Exception {
+        Contact p = this.contacts.get(ps);
+        if (p == null) {
+            throw new Exception("No se encontro al elemento");
+        }
+        return p;
+    }
+
+    }
+
 

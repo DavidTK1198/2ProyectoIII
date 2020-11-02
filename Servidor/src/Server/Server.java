@@ -51,34 +51,12 @@ public class Server {
                                 Worker worker = new Worker(skt, in, out, user);
                                 workers.add(worker);
                                 worker.start();
+                                worker.setServ(this);
                             } catch (Exception ex) {
                                 out.writeInt(Protocol.ERROR_LOGIN);
                                 out.flush();
                             }
-                        }
-                        break;
-                        case 2:
-                            break;
-                        case 3:
-                            break;
-                        case 4:
-                            List<User> lu = (List<User>) in.readObject();
-                            try{
-                                for(int i=0; i<lu.size();i++){
-                                    User conec = lu.get(i);
-                                    this.usuariosConectados(conec);
-                                }
-                                out.writeInt(Protocol.ERROR_NO_ERROR);
-                                out.writeObject(conectados);
-                                out.flush();
-                              
-                                conectados = new ArrayList<>();
-                                
-                                
-                            }catch(Exception ex){
-                                out.writeInt(Protocol.ERROR_UPDATE);
-                                out.flush();
-                            }
+                        }            
                         
                     }
                 } catch (ClassNotFoundException ex) {
@@ -112,7 +90,7 @@ public class Server {
             }
         }
     }
-      public void usuariosConectados(User usuario)throws Exception{
+      public void usuariosConectados(User usuario){
           if(workers.size() == 1){
               return;
           }
@@ -124,4 +102,10 @@ public class Server {
          
     }
 
+
+
 }
+
+
+
+

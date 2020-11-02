@@ -1,6 +1,5 @@
 package Client.Presentation.login;
 
-import Client.Presentation.login.Controller;
 import chatProtocol.User;
 import chatProtocol.Protocol;
 import chatProtocol.Message;
@@ -113,6 +112,12 @@ public class ServiceProxy implements IService{
                     catch (ClassNotFoundException ex) {}
                     break;
                 case Protocol.UPDATE:
+                     try {
+                        List<User> us=(List<User>)in.readObject();
+                        this.send(us);
+                    } 
+                    catch (ClassNotFoundException ex) {}
+                    break;
                     
                 }
                 
@@ -123,22 +128,26 @@ public class ServiceProxy implements IService{
             }                        
         }
     }
-    public void update(final List<User> us) throws Exception{
-          SwingUtilities.invokeLater(new Runnable(){
+    public void send(final List<User> us){
+               SwingUtilities.invokeLater(new Runnable(){
             public void run(){
                controller.setUsers(us);
             }
          }
       );
+     
     }
-    public void send(List<User> us){
+    @Override
+    public void update(List<User> us){
+     
           try {
             out.writeInt(Protocol.UPDATE);
             out.writeObject(us);
             out.flush();
           }catch(IOException Ex){
               
-          }
+          }     
+        
     }
     
    private void deliver( final Message  message ){
@@ -150,6 +159,12 @@ public class ServiceProxy implements IService{
       );
    }
 }
+
+
+
+
+
+
 
 
 

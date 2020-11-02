@@ -43,11 +43,14 @@ public class Service implements IService{
         srv.remove(p);
     }
 
-    public List<User> update(List<User> us) throws Exception{
-        
-        return null;
-    }    
+    @Override
+    public void update(List<User> list) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+      
 }
+
 
 
 

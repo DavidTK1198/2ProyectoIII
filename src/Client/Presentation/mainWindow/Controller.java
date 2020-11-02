@@ -8,6 +8,7 @@ package Client.Presentation.mainWindow;
 import Client.Application.Session;
 import Client.Logic.Contact;
 import Client.Logic.Profile;
+import chatProtocol.User;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -77,6 +78,10 @@ public class Controller {
         perfilito.addContact(c);
         model.setLista(model.getProfile().getContact());
     }
+    
+    void logout(){
+        this.Parent.logout();
+    }
 
     public void Update() {
 
@@ -85,10 +90,13 @@ public class Controller {
             List<Contact> list = perfil.getContact();
             model.setContact(new Contact());
             try {
+                List<User> nuva=model.fillUser();
+                if(nuva!=null){
                 this.Parent.update(model.fillUser());
                 this.model.compare(Parent.getUsers());
+                }
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "No");
+                JOptionPane.showMessageDialog(null, "Error con el registro de contactos");
             }
             model.setLista(list);
 
@@ -98,3 +106,6 @@ public class Controller {
     }
 
 }
+
+
+

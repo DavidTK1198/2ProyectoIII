@@ -5,6 +5,7 @@
  */
 package Client.Presentation.mainWindow;
 
+import Client.Application.Session;
 import Client.Logic.Contact;
 import Client.Logic.Profile;
 import chatProtocol.User;
@@ -18,42 +19,42 @@ import java.util.Observer;
  * @author DavidTK1198
  */
 public class Model extends Observable {
-    
+
     private TableModel table;
     private Contact contact;
     private int[] col = {0, 1};
     private List<Contact> lista;
     private boolean editable;
     Profile current = new Profile();
-    
+
     public void addObserver(Observer a) {
-        
+
         super.addObserver(a);
         refresh();
     }
-    
+
     public Model() {
-        
+
         lista = new ArrayList<>();
         table = new TableModel(lista, col);
         editable = false;
     }
-    
+
     public boolean isEditable() {
         return editable;
     }
-    
+
     public void setEditable(boolean editable) {
         this.editable = editable;
     }
-    
+
     private void refresh() {
         this.contact = new Contact();
         this.setChanged();
         this.notifyObservers();
-        
+
     }
-    
+
     public List<User> fillUser() {
         List<User> nueva = new ArrayList<>();
         if (lista.isEmpty()) {
@@ -63,64 +64,75 @@ public class Model extends Observable {
             Contact es = lista.get(i);
             User us = new User();
             us.setId(es.getIdC());
+            nueva.add(us);
         }
         return nueva;
     }
-    
-    public void compare(List<User> us) {
-        
+
+    public void compare(List<User> us) throws Exception {
+        boolean bandera = false;
         for (int i = 0; i < us.size(); i++) {
-            Contact es = lista.get(i);
             User use = us.get(i);
-            if (use.getId().equals(es.getIdC())) {
-                es.setEstado(true);
+            Profile c = (Profile) Session.instance().getAttribute(Session.USER_ATTRIBUTE);
+            Contact e = c.getContacto(use.getId());
+            bandera=true;
+            if (use.getId().equals(e.getIdC())) {
+                e.setEstado(true);
+            } else {
+                e.setEstado(false);
+            }
+        }
+        if (bandera == false) {
+            for (int i = 0; i < lista.size(); i++) {
+                Contact nuevo = lista.get(i);
+                nuevo.setEstado(false);
             }
         }
     }
-    
+
     public TableModel getTable() {
         return table;
     }
-    
+
     public void setTable(List<Contact> tablee) {
         table = new TableModel(tablee, col);
     }
-    
+
     public Contact getContact() {
         return this.contact;
     }
-    
+
     public void setContact(Contact use) {
         this.contact = use;
     }
-    
+
     public List<Contact> getLista() {
         return lista;
     }
-    
+
     public void setLista(List<Contact> a) {
         this.lista = a;
         setTable(a);
         refresh();
     }
-    
+
     public Contact getRow(int n) {
         return table.getRowAt(n);
     }
-    
+
     void commit() {
         this.contact = new Contact();
         this.setChanged();
         this.notifyObservers();
     }
-    
+
     Profile getProfile() {
         return current;
     }
-    
+
     public void setCurrent(Profile current) {
         this.current = current;
     }
-    
+
 }
 

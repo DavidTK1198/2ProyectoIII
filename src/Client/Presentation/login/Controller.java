@@ -91,16 +91,13 @@ public class Controller {
 
         ServiceProxy.instance().post(nuevo);
         model.commit();
+        
     }
     
     public void update(List<User> us) throws Exception{
-        List <User> nueva = ServiceProxy.instance().update(us);
-        model.setUsers(nueva);
+        ServiceProxy.instance().update(us);
     }
 
-    public void setUsers(List<User> s){
-        model.setUsers(s);
-    }
     public void logout() {
         try {
             ServiceProxy.instance().logout(model.getCurrentUser());
@@ -109,6 +106,8 @@ public class Controller {
         model.setCurrentUser(null);
         model.commit();
         Session.instance().removeAttribute(Session.USER_ATTRIBUTE);
+        this.Main_Close();
+        this.show();
     }
 
     public void exit() {
@@ -123,7 +122,14 @@ public class Controller {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    void setUsers(List<User> us) {
+        model.setUsers(us);
+    }
+
 }
+
+
+
 
 
 

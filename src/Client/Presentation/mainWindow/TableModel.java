@@ -17,7 +17,7 @@ public class TableModel extends AbstractTableModel {
 
     private List<Contact> filas;
     private int[] columnas;
-    private String[] nombCol = {"Nombre","Estado"};
+    private String[] nombCol = {"UserName","Estado"};
 
     public TableModel(List<Contact> filas, int[] columnas) {
         this.filas = filas;
@@ -61,5 +61,6 @@ public class TableModel extends AbstractTableModel {
     }
 
 }
+
 
 
