@@ -5,12 +5,7 @@
  */
 package Client.Presentation.mainWindow;
 
-import Client.Application.Session;
-import Client.Logic.Contact;
-import Client.Logic.Profile;
 import chatProtocol.User;
-import java.util.List;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,15 +16,12 @@ public class Controller {
     private View vista;
     private Model model;
     private Client.Presentation.login.Controller Parent;
-   
-    private Refresher refresh;
 
     public Controller(View vista, Model model) {
         this.vista = vista;
         this.model = model;
         vista.setControl(this);
         vista.setModel(model);
-        refresh = new Refresher(this);
 
     }
 
@@ -40,7 +32,6 @@ public class Controller {
     public void setParent(Client.Presentation.login.Controller Parent) {
         this.Parent = Parent;
     }
-    
 
     public void show() {
         this.preSet();
@@ -56,64 +47,26 @@ public class Controller {
 
     }
 
-    String getUser() {
-
-        return model.getProfile().getId();
-    }
-
-    String getEstado() {
-        return "Online";
-    }
-
     public void preSet() {
-        Profile perfil = (Profile) Session.instance().getAttribute(Session.USER_ATTRIBUTE);
-        model.setCurrent(perfil);
-        List<Contact> list = perfil.getContact();
-        model.setContact(new Contact());
-        model.setLista(list);
+        User perfilito = this.Parent.getLoggedUser();
+        model.setLista(perfilito.getUser());
         model.commit();
-        refresh.start();
     }
 
-    public void agregarContacto(Contact c) throws Exception {
-        Profile perfilito = (Profile) Session.instance().getAttribute(Session.USER_ATTRIBUTE);
-        perfilito.addContact(c);
-        model.setLista(model.getProfile().getContact());
+    public void agregarContacto(User c) throws Exception {
+        User perfilito = this.Parent.getLoggedUser();
+        perfilito.addUser(c);
+        model.setLista(perfilito.getUser());
     }
-    
-    public void logout(){
+
+    public void logout() {
         this.Parent.logout();
     }
 
     public void Update() {
 
-        Profile perfil = (Profile) Session.instance().getAttribute(Session.USER_ATTRIBUTE);
-        if (perfil != null) {
-            List<Contact> list = perfil.getContact();
-            model.setContact(new Contact());
-            try {
-                List<User> nuva=model.fillUser();
-                if(nuva!=null){
-                this.Parent.update(model.fillUser());
-                this.model.compare(Parent.getUsers());
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Error con el registro de contactos");
-            }
-            model.setLista(list);
-
-            model.commit();
-        }
-
-    }
-
-    public void whatever(Contact contacto) {
-        this.Parent.setCurrentContact(contacto);
-        this.Parent.Chat_show();
     }
 
 }
-
-
 
 

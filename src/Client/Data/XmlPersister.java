@@ -34,26 +34,27 @@ public class XmlPersister {
         return my_instance;
     }
 
-    public void store(LocalData my_data) throws Exception {
-        JAXBContext jaxbContext = JAXBContext.newInstance(LocalData.class);
-        FileOutputStream os = new FileOutputStream(path);
-        Marshaller nuevo = jaxbContext.createMarshaller();
-        nuevo.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        nuevo.marshal(my_data, os);
-        os.flush();
-        os.close();
-
-    }
-
-    public LocalData restore() throws Exception {
-        
-        JAXBContext jaxbContext = JAXBContext.newInstance(LocalData.class);
-        FileInputStream is = new FileInputStream(path);
-        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-        LocalData result = (LocalData) unmarshaller.unmarshal(is);
-        is.close();
-        return result;
-    }
+//    public void store(LocalData my_data) throws Exception {
+//        JAXBContext jaxbContext = JAXBContext.newInstance(LocalData.class);
+//        FileOutputStream os = new FileOutputStream(path);
+//        Marshaller nuevo = jaxbContext.createMarshaller();
+//        nuevo.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+//        nuevo.marshal(my_data, os);
+//        os.flush();
+//        os.close();
+//
+//    }
+//
+//    public LocalData restore() throws Exception {
+//        
+//        JAXBContext jaxbContext = JAXBContext.newInstance(LocalData.class);
+//        FileInputStream is = new FileInputStream(path);
+//        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+//        LocalData result = (LocalData) unmarshaller.unmarshal(is);
+//        is.close();
+//        return result;
+//    }
 
     
 }
+

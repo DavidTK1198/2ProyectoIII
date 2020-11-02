@@ -1,22 +1,41 @@
 package chatProtocol;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
-public class User implements Serializable{
+public class User implements Serializable {
+
     String id;
     String clave;
+    private boolean estado;
+    private Map<String, User> contacts;
+    private String Nombre;
 
     public User() {
-        this.clave="";
-        this.id="";
+        this.clave = "";
+        this.id = "";
+        estado = false;
+        this.contacts=new HashMap<>();
     }
+
+    public User(String Nombre, String id, String clave) {
+        this.id = id;
+        this.clave = clave;
+        estado = false;
+        this.contacts=new HashMap<>();
+    }
+
     
     public User(String id, String clave) {
         this.id = id;
         this.clave = clave;
+        estado = false;
+        this.contacts=new HashMap<>();
     }
-
     public String getId() {
         return id;
     }
@@ -57,6 +76,51 @@ public class User implements Serializable{
         }
         return true;
     }
-    
+
+    public List<User> getUser() {
+        List<User> ls = new ArrayList<>();
+        for (Map.Entry<String, User> entry : contacts.entrySet()) {
+            User ayudante = entry.getValue();
+            ls.add(ayudante);
+        }
+        return ls;
+    }
+
+    public void addUser(User p) throws Exception {
+        User c = contacts.get(p.getId());
+        if (c == null) {
+            this.contacts.put(p.getId(), p);
+
+        } else {
+            throw new Exception("El contacto ya existe");
+        }
+    }
+
+    public User getUser(String ps) throws Exception {
+        User p = this.contacts.get(ps);
+        if (p == null) {
+            throw new Exception("No se encontro al elemento");
+        }
+        return p;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
+    }
+
 }
+
+
 

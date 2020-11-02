@@ -5,9 +5,6 @@
  */
 package Client.Presentation.mainWindow;
 
-import Client.Application.Session;
-import Client.Logic.Contact;
-import Client.Logic.Profile;
 import chatProtocol.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +18,10 @@ import java.util.Observer;
 public class Model extends Observable {
 
     private TableModel table;
-    private Contact contact;
+    private User contact;
     private int[] col = {0, 1};
-    private List<Contact> lista;
+    private List<User> lista;
     private boolean editable;
-    Profile current = new Profile();
 
     public void addObserver(Observer a) {
 
@@ -38,6 +34,7 @@ public class Model extends Observable {
         lista = new ArrayList<>();
         table = new TableModel(lista, col);
         editable = false;
+        this.contact = new User();
     }
 
     public boolean isEditable() {
@@ -49,89 +46,46 @@ public class Model extends Observable {
     }
 
     private void refresh() {
-        this.contact = new Contact();
+        this.contact = new User();
         this.setChanged();
         this.notifyObservers();
 
-    }
-
-    public List<User> fillUser() {
-        List<User> nueva = new ArrayList<>();
-        if (lista.isEmpty()) {
-            return null;
-        }
-        for (int i = 0; i < lista.size(); i++) {
-            Contact es = lista.get(i);
-            User us = new User();
-            us.setId(es.getIdC());
-            nueva.add(us);
-        }
-        return nueva;
-    }
-
-    public void compare(List<User> us) throws Exception {
-        boolean bandera = false;
-        for (int i = 0; i < us.size(); i++) {
-            User use = us.get(i);
-            Profile c = (Profile) Session.instance().getAttribute(Session.USER_ATTRIBUTE);
-            Contact e = c.getContacto(use.getId());
-            bandera=true;
-            if (use.getId().equals(e.getIdC())) {
-                e.setEstado(true);
-            } else {
-                e.setEstado(false);
-            }
-        }
-        if (bandera == false) {
-            for (int i = 0; i < lista.size(); i++) {
-                Contact nuevo = lista.get(i);
-                nuevo.setEstado(false);
-            }
-        }
     }
 
     public TableModel getTable() {
         return table;
     }
 
-    public void setTable(List<Contact> tablee) {
+    public void setTable(List<User> tablee) {
         table = new TableModel(tablee, col);
     }
 
-    public Contact getContact() {
+    public User getContact() {
         return this.contact;
     }
 
-    public void setContact(Contact use) {
+    public void setContact(User use) {
         this.contact = use;
     }
 
-    public List<Contact> getLista() {
+    public List<User> getLista() {
         return lista;
     }
 
-    public void setLista(List<Contact> a) {
+    public void setLista(List<User> a) {
         this.lista = a;
         setTable(a);
         refresh();
     }
 
-    public Contact getRow(int n) {
+    public User getRow(int n) {
         return table.getRowAt(n);
     }
 
     void commit() {
-        this.contact = new Contact();
+        this.contact = new User();
         this.setChanged();
         this.notifyObservers();
-    }
-
-    Profile getProfile() {
-        return current;
-    }
-
-    public void setCurrent(Profile current) {
-        this.current = current;
     }
 
 }

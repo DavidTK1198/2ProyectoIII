@@ -5,7 +5,7 @@
  */
 package Client.Presentation.mainWindow;
 
-import Client.Logic.Contact;
+import chatProtocol.User;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Observable;
@@ -29,6 +29,7 @@ public class View extends javax.swing.JDialog implements Observer {
     public View(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    
     }
     
      public void setControl(Controller control) {
@@ -49,6 +50,13 @@ public class View extends javax.swing.JDialog implements Observer {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelchat2 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextArea5 = new javax.swing.JTextArea();
+        mensaje4 = new javax.swing.JTextField();
+        enviar4 = new javax.swing.JButton();
+        NombreC4 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -74,6 +82,61 @@ public class View extends javax.swing.JDialog implements Observer {
         jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+
+        panelchat2.setBackground(new java.awt.Color(0, 153, 204));
+
+        jTextArea5.setEditable(false);
+        jTextArea5.setColumns(20);
+        jTextArea5.setRows(5);
+        jScrollPane6.setViewportView(jTextArea5);
+
+        enviar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Client/Icons/icons8-email-send-30.png"))); // NOI18N
+
+        NombreC4.setText("Nombre del contacto");
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Client/Icons/icono_chat.png"))); // NOI18N
+
+        javax.swing.GroupLayout panelchat2Layout = new javax.swing.GroupLayout(panelchat2);
+        panelchat2.setLayout(panelchat2Layout);
+        panelchat2Layout.setHorizontalGroup(
+            panelchat2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelchat2Layout.createSequentialGroup()
+                .addGroup(panelchat2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelchat2Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(NombreC4))
+                    .addGroup(panelchat2Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(panelchat2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(mensaje4, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panelchat2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelchat2Layout.createSequentialGroup()
+                                .addGap(58, 58, 58)
+                                .addComponent(enviar4))
+                            .addGroup(panelchat2Layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addComponent(jLabel10)))))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panelchat2Layout.setVerticalGroup(
+            panelchat2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelchat2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(NombreC4)
+                .addGroup(panelchat2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelchat2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(panelchat2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(mensaje4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(enviar4, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(panelchat2Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jLabel10)))
+                .addGap(47, 47, 47))
+        );
 
         jPanel2.setBackground(new java.awt.Color(71, 120, 197));
 
@@ -340,6 +403,11 @@ public class View extends javax.swing.JDialog implements Observer {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(156, 156, 156)
+                    .addComponent(panelchat2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(156, 156, 156)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,6 +416,11 @@ public class View extends javax.swing.JDialog implements Observer {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(75, 75, 75)
+                    .addComponent(panelchat2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(76, 76, 76)))
         );
 
         pack();
@@ -364,7 +437,7 @@ public class View extends javax.swing.JDialog implements Observer {
             JOptionPane.showMessageDialog(null, e.getMessage());
             return;
         }
-        Contact contacto = new Contact(nombreContacto,cedula);
+        User contacto = new User(nombreContacto,cedula);
         try{
               this.control.agregarContacto(contacto);
         }catch(Exception e){
@@ -387,10 +460,9 @@ public class View extends javax.swing.JDialog implements Observer {
        
         int numero = this.TContacts.getSelectedRow();
         if(numero>-1){
-            Contact contacto = model.getTable().getRowAt(numero);
-            control.whatever(contacto);
+            User contacto = model.getTable().getRowAt(numero);
             
-            
+ 
         }
         
         
@@ -404,11 +476,14 @@ public class View extends javax.swing.JDialog implements Observer {
     private javax.swing.JButton AgrCont;
     private javax.swing.JTextField IDCont;
     private javax.swing.JTextField NomC;
+    private javax.swing.JLabel NombreC4;
     private javax.swing.JTable TContacts;
     private javax.swing.JLabel contactos;
     private javax.swing.JLabel dia;
+    private javax.swing.JButton enviar4;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
@@ -422,14 +497,18 @@ public class View extends javax.swing.JDialog implements Observer {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JTextArea jTextArea5;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField mensaje4;
+    private javax.swing.JPanel panelchat2;
     private javax.swing.JButton salir;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void update(Observable o, Object arg) {
-        this.jLabel2.setText(control.getUser());
-        this.jLabel11.setText(control.getEstado());
+        this.jLabel2.setText(model.getContact().getId());
+        this.jLabel11.setText(model.getContact().getId());
         this.TContacts.setModel(model.getTable());
          Date date = new Date();
        this.dia.setText(new SimpleDateFormat("dd/MM/yyyy").format(date) );

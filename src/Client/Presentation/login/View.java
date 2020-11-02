@@ -1,6 +1,7 @@
 package Client.Presentation.login;
 
-import Client.Logic.Profile;
+
+import chatProtocol.User;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JOptionPane;
@@ -107,7 +108,7 @@ public class View extends javax.swing.JFrame implements Observer {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(7, 7, 7)
                 .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,7 +183,7 @@ public class View extends javax.swing.JFrame implements Observer {
             JOptionPane.showMessageDialog(null, m.getMessage());
             return;
         }
-        Profile perfil = new Profile(userName, Password);
+        User perfil = new User(userName, Password);
         try {
             this.control.login(perfil);
             this.inpPassword.setText("");
@@ -213,7 +214,7 @@ public class View extends javax.swing.JFrame implements Observer {
             JOptionPane.showMessageDialog(null, m.getMessage());
             return;
         }
-        Profile perfil = new Profile(userName, Password);
+        User perfil = new User(userName, Password);
         try {
             this.control.registrarse(perfil);
             this.inpPassword.setText("");

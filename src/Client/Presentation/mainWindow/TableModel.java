@@ -5,7 +5,8 @@
  */
 package Client.Presentation.mainWindow;
 
-import Client.Logic.Contact;
+
+import chatProtocol.User;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -15,11 +16,11 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TableModel extends AbstractTableModel {
 
-    private List<Contact> filas;
+    private List<User> filas;
     private int[] columnas;
     private String[] nombCol = {"UserName","Estado"};
 
-    public TableModel(List<Contact> filas, int[] columnas) {
+    public TableModel(List<User> filas, int[] columnas) {
         this.filas = filas;
         this.columnas = columnas;
     }
@@ -36,10 +37,10 @@ public class TableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Contact prod = filas.get(rowIndex);
+        User prod = filas.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return prod.getIdC();
+                return prod.getId();
             case 1: 
                 if(prod.isEstado() == false){
                     return "offline";
@@ -56,11 +57,14 @@ public class TableModel extends AbstractTableModel {
         return nombCol[column];
     }
 
-    public Contact getRowAt(int n) {
+    public User getRowAt(int n) {
         return filas.get(n);
     }
 
 }
+
+
+
 
 
 

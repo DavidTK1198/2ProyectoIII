@@ -111,13 +111,6 @@ public class ServiceProxy implements IService{
                     } 
                     catch (ClassNotFoundException ex) {}
                     break;
-                case Protocol.UPDATE:
-                     try {
-                        List<User> us=(List<User>)in.readObject();
-                        this.send(us);
-                    } 
-                    catch (ClassNotFoundException ex) {}
-                    break;
                     
                 }
                 
@@ -128,27 +121,8 @@ public class ServiceProxy implements IService{
             }                        
         }
     }
-    public void send(final List<User> us){
-               SwingUtilities.invokeLater(new Runnable(){
-            public void run(){
-               controller.setUsers(us);
-            }
-         }
-      );
-     
-    }
-    @Override
-    public void update(List<User> us){
-     
-          try {
-            out.writeInt(Protocol.UPDATE);
-            out.writeObject(us);
-            out.flush();
-          }catch(IOException Ex){
-              
-          }     
-        
-    }
+    
+  
     
    private void deliver( final Message  message ){
       SwingUtilities.invokeLater(new Runnable(){
@@ -180,7 +154,13 @@ public class ServiceProxy implements IService{
             return null;
         }
     }
+
+    @Override
+    public void update(List<User> us) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
+
 
 
 

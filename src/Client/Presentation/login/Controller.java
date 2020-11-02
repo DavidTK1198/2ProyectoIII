@@ -6,8 +6,6 @@
 package Client.Presentation.login;
 
 import Client.Application.Session;
-import Client.Logic.Contact;
-import Client.Logic.Profile;
 import chatProtocol.Message;
 import chatProtocol.User;
 import java.util.List;
@@ -24,9 +22,6 @@ public class Controller {
     Client.Presentation.mainWindow.Model main_model;
     Client.Presentation.mainWindow.View main_Vista;
     Client.Presentation.mainWindow.Controller main_control;
-    Client.Presentation.chat.Model Chat_model;
-    Client.Presentation.chat.View Chat_Vista;
-    Client.Presentation.chat.Controller Chat_control;
     ServiceProxy localService;
 
     public Controller(View vista, Model model) {
@@ -40,13 +35,9 @@ public class Controller {
     }
 
     public void initOptions() {
-         this.Chat_model = new Client.Presentation.chat.Model();
-        this.Chat_Vista = new Client.Presentation.chat.View(this.vista, true);
-        this.Chat_control = new Client.Presentation.chat.Controller(this.Chat_Vista, this.Chat_model);
         this.main_model = new Client.Presentation.mainWindow.Model();
         this.main_Vista = new Client.Presentation.mainWindow.View(this.vista, true);
         this.main_control = new Client.Presentation.mainWindow.Controller(this.main_Vista, this.main_model);
-        this.Chat_control.setParent(this);
         this.main_control.setParent(this);
         localService = (ServiceProxy) ServiceProxy.instance();
         localService.setController(this);
@@ -75,22 +66,18 @@ public class Controller {
         this.vista.setVisible(false);
     }
 
-    public void login(Profile profi) throws Exception {
+    public void login(User profi) throws Exception {
 
-        User nuevoUsuario = new User();
-        nuevoUsuario.setClave(profi.getClave());
-        nuevoUsuario.setId(profi.getId());
-        User logged = ServiceProxy.instance().login(nuevoUsuario);
-        Session.instance().setAttibute(Session.USER_ATTRIBUTE, profi);
-        model.setCurrentUser(logged);
+        User s=ServiceProxy.instance().login(profi);
+        Session.instance().setAttibute(Session.USER_ATTRIBUTE, s);
+        model.setCurrentUser(s);
         this.Hide();
         this.MainShow();
         model.commit();
     }
-    public void registrarse(Profile p)throws Exception{
-        User nuevoRegistro = new User(p.getId(),p.getClave());
-        User registered = ServiceProxy.instance().Registro(nuevoRegistro);
-        Session.instance().setAttibute(Session.USER_ATTRIBUTE, p);
+    public void registrarse(User p)throws Exception{
+        User registered = ServiceProxy.instance().Registro(p);
+        Session.instance().setAttibute(Session.USER_ATTRIBUTE, registered);
         model.setCurrentUser(registered);
         this.Hide();
         this.MainShow();
@@ -124,28 +111,27 @@ public class Controller {
     public void exit() {
         System.exit(0);
     }
-
-    public List<User> getUsers(){
-        return model.getUsers();
-    }
     
+   public  User getLoggedUser(){
+        return model.getCurrentUser();
+    }
     public void deliver(Message message) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void setUsers(List<User> us) {
-        model.setUsers(us);
-    }
-    public void setCurrentContact(Contact cont){
-        this.Chat_control.setCurrentContact(cont);
-    }
-
-    public void Chat_show() {
-        this.Chat_control.show();
-    }
-    
+   
 
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

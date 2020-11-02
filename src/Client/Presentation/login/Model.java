@@ -7,8 +7,6 @@
 package Client.Presentation.login;
 
 import chatProtocol.User;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 
@@ -18,11 +16,10 @@ import java.util.List;
 
 public class Model extends java.util.Observable {
     User currentUser;
-    List<User> users;
 
     public Model() {
        currentUser = new User();
-       users=new ArrayList<>();
+      
      
     }
 
@@ -30,13 +27,7 @@ public class Model extends java.util.Observable {
         return currentUser;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
+   
 
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
@@ -57,6 +48,7 @@ public class Model extends java.util.Observable {
 
 
 }
+
 
 
 
