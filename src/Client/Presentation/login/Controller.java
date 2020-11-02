@@ -139,9 +139,14 @@ public class Controller {
     public void setCurrentContact(Contact cont){
         this.Chat_control.setCurrentContact(cont);
     }
+
+    public void Chat_show() {
+        this.Chat_control.show();
+    }
     
 
 }
+
 
 
 

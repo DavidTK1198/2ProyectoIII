@@ -389,7 +389,6 @@ public class View extends javax.swing.JDialog implements Observer {
         if(numero>-1){
             Contact contacto = model.getTable().getRowAt(numero);
             control.whatever(contacto);
-            control.showChat();
             
             
         }

@@ -21,7 +21,7 @@ public class Controller {
     private View vista;
     private Model model;
     private Client.Presentation.login.Controller Parent;
-    private Client.Presentation.chat.Controller ChatControl;
+   
     private Refresher refresh;
 
     public Controller(View vista, Model model) {
@@ -84,14 +84,6 @@ public class Controller {
     public void logout(){
         this.Parent.logout();
     }
-    public void chatLogOut(){
-        this.ChatControl.hide();
-    }
-    
-    public void showChat(){
-        this.ChatControl.show();
-       
-    }
 
     public void Update() {
 
@@ -117,9 +109,11 @@ public class Controller {
 
     public void whatever(Contact contacto) {
         this.Parent.setCurrentContact(contacto);
+        this.Parent.Chat_show();
     }
 
 }
+
 
 
 

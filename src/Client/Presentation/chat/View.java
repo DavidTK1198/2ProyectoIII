@@ -127,6 +127,7 @@ public class View extends javax.swing.JDialog implements Observer  {
     @Override
     public void update(Observable o, Object arg) {
         this.NombreC.setText(model.nombrePersona);
+        System.out.println(model.nombrePersona);
     }
 
     /**

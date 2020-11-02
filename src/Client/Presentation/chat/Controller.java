@@ -11,6 +11,8 @@ import Client.Logic.Contact;
 import Client.Logic.Profile;
 import chatProtocol.Message;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -60,15 +62,27 @@ public class Controller {
     public void setCurrentContact(Contact c){
         Profile profi = (Profile) Session.instance().getAttribute(Session.USER_ATTRIBUTE);
         List<Chat> lc = profi.getChat();
+        boolean flag=false;
         for(int i=0; i<lc.size(); i++){
             if(lc.get(i).getIdContacto().equals(c.getIdC())){
                 model.setMessages(lc.get(i).getMensajes());
-                model.setContacto(c.getNombre());
+                flag=true;
+                
             }
         }
+        if(flag==false){
+            Chat cc = new Chat(c.getIdC());
+            try {
+                profi.addChat(cc);
+            } catch (Exception ex) {
+                
+            }
+        }
+        model.setContacto(c.getNombre());
         
         model.commit();
         
         
     }
 }
+
