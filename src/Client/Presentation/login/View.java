@@ -66,6 +66,11 @@ public class View extends javax.swing.JFrame implements Observer {
                 RegistrarseMouseClicked(evt);
             }
         });
+        Registrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegistrarseActionPerformed(evt);
+            }
+        });
 
         chkAgree.setFont(new java.awt.Font("Berlin Sans FB", 0, 15)); // NOI18N
         chkAgree.setText("I agree to the terms and conditions");
@@ -112,7 +117,7 @@ public class View extends javax.swing.JFrame implements Observer {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(71, 71, 71)
-                        .addComponent(Registrarse))
+                        .addComponent(Registrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,7 +189,7 @@ public class View extends javax.swing.JFrame implements Observer {
             this.inpUsername.setText("");
        
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "cualquuiercosa");
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return;
         }
 
@@ -196,8 +201,36 @@ public class View extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_loginActionPerformed
 
     private void RegistrarseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarseMouseClicked
-        // TODO add your handling code here:
+         String userName = "";
+        String Password = "";
+        try {
+            if (this.inpPassword.getText().isEmpty() || this.inpPassword.getText().isEmpty() || !this.chkAgree.isSelected()) {
+                throw new Exception("Espacios incompletos");
+            }
+            userName = this.inpUsername.getText();
+            Password = this.inpPassword.getText();
+        } catch (Exception m) {
+            JOptionPane.showMessageDialog(null, m.getMessage());
+            return;
+        }
+        Profile perfil = new Profile(userName, Password);
+        try {
+            this.control.registrarse(perfil);
+            this.inpPassword.setText("");
+            this.inpUsername.setText("");
+            this.chkAgree.setSelected(false);
+            
+       
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e.getMessage());
+            return;
+        }
+        
     }//GEN-LAST:event_RegistrarseMouseClicked
+
+    private void RegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RegistrarseActionPerformed
 
     public void setModel(Model model) {
         this.model = model;

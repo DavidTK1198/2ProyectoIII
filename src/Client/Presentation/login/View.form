@@ -60,7 +60,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="login" min="-2" pref="107" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                          <Component id="Registrarse" min="-2" max="-2" attributes="0"/>
+                          <Component id="Registrarse" min="-2" pref="121" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jLabel10" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                       <Component id="jSeparator1" alignment="0" min="-2" pref="320" max="-2" attributes="0"/>
@@ -135,6 +135,7 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="RegistrarseMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RegistrarseActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="chkAgree">

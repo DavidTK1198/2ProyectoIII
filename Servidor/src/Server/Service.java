@@ -48,6 +48,16 @@ public class Service implements IService{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public User Registro(User usuario) throws Exception {
+         User registro = users.read(usuario.getId()); //lee el nuevo usario a registrar
+         if(registro == null){
+             throw new Exception("Usuario ya existe");
+         }
+         users.create(usuario);
+         return registro;
+    }
+
       
 }
 

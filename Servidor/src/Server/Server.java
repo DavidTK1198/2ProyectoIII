@@ -52,11 +52,29 @@ public class Server {
                                 workers.add(worker);
                                 worker.start();
                                 worker.setServ(this);
+                                break;
                             } catch (Exception ex) {
                                 out.writeInt(Protocol.ERROR_LOGIN);
                                 out.flush();
                             }
-                        }            
+                           
+                        }        
+                         case Protocol.REGISTER:
+                             User nuevoUsuario = (User) in.readObject();
+                             try{
+                                nuevoUsuario = Service.instance().Registro(nuevoUsuario);
+                                out.writeInt(Protocol.ERROR_NO_ERROR);
+                                out.writeObject(nuevoUsuario);
+                                out.flush();
+                                Worker worker = new Worker(skt, in, out, nuevoUsuario);
+                                workers.add(worker);
+                                worker.start();
+                                worker.setServ(this);
+                                break;
+                             }catch(Exception ex){
+                                 out.writeInt(Protocol.ERROR_REGISTER);
+                                 out.flush();
+                             }
                         
                     }
                 } catch (ClassNotFoundException ex) {

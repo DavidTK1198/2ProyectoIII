@@ -158,6 +158,28 @@ public class ServiceProxy implements IService{
          }
       );
    }
+
+    @Override
+    public User Registro(User usuario) throws Exception {
+         connect();
+        try {
+            out.writeInt(Protocol.REGISTER);
+            out.writeObject(usuario);
+            out.flush();
+            int response = in.readInt();
+            if (response==Protocol.ERROR_NO_ERROR){
+                User u1=(User) in.readObject();
+                this.start();
+                return u1;
+            }
+            else {
+                disconnect();
+                throw new Exception("Los datos ingresados corresponder a otro usuario del sistema");
+            }            
+        } catch (IOException | ClassNotFoundException ex) {
+            return null;
+        }
+    }
 }
 
 

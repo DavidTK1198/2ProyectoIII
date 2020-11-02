@@ -86,6 +86,16 @@ public class Controller {
         this.MainShow();
         model.commit();
     }
+    public void registrarse(Profile p)throws Exception{
+        User nuevoRegistro = new User(p.getId(),p.getClave());
+        User registered = ServiceProxy.instance().Registro(nuevoRegistro);
+        Session.instance().setAttibute(Session.USER_ATTRIBUTE, p);
+        model.setCurrentUser(registered);
+        this.Hide();
+        this.MainShow();
+        model.commit();
+        
+    }
 
     public void post(Message nuevo) {
 
