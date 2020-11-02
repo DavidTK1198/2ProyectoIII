@@ -50,15 +50,19 @@ public class Service implements IService{
 
     @Override
     public User Registro(User usuario) throws Exception {
-         User registro = users.read(usuario.getId()); //lee el nuevo usario a registrar
-         if(registro == null){
-             throw new Exception("Usuario ya existe");
-         }
+         
+        try {
          users.create(usuario);
-         return registro;
-    }
-
-      
+       
+        User result=users.read(usuario.getId());
+        if(result==null)  throw new Exception("User does not exist");
+        if(!result.getClave().equals(usuario.getClave()))throw new Exception("User does not exist");
+        return result;
+             
+        }catch(Exception e){
+        throw new Exception("Usuario ya existe");
+        }                  
+    }  
 }
 
 
