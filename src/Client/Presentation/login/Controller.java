@@ -6,6 +6,7 @@
 package Client.Presentation.login;
 
 import Client.Application.Session;
+import Client.Data.XmlPersister;
 import chatProtocol.Message;
 import chatProtocol.User;
 import java.util.List;
@@ -113,9 +114,12 @@ public class Controller {
     public void logout() {
         try {
             ServiceProxy.instance().logout(model.getCurrentUser());
+            XmlPersister.getInstance().makeXml(Session.instance().getLC());
         } catch (Exception ex) {
         }
+
         model.setCurrentUser(null);
+
         model.commit();
         Session.instance().removeAttribute(Session.USER_ATTRIBUTE);
         this.Main_Close();
@@ -131,11 +135,11 @@ public class Controller {
     }
 
     public void deliver(Message message) {
-        
+
         this.control_chat.deliver(message);
         if (!this.control_View.isShowing()) {
             JOptionPane.showMessageDialog(null, "Mensaje recibido de: " + message.getRemitente());
-        }  
+        }
     }
 
     public void Update(User u1) {

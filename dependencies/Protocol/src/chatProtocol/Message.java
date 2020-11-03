@@ -19,6 +19,7 @@ public class Message implements Serializable {
     String destinatario;
     String Remitente;
     String mensaje;
+    String hora;
     Date date;
 
     public String getFecha() {
@@ -33,12 +34,15 @@ public class Message implements Serializable {
         return Remitente;
     }
 
+    
+    
     public Message(String destinatario, String Remitente, String mensaje) {
         date = new Date();
         fecha = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(date);
         this.destinatario = destinatario;
         this.Remitente = Remitente;
         this.mensaje = mensaje;
+        hora = new SimpleDateFormat("HH:mm").format(date);
     }
 
     public Message() {
@@ -69,8 +73,15 @@ public class Message implements Serializable {
         this.Remitente = Remitente;
     }
     public String getHora(){
-          String m = new SimpleDateFormat("HH:mm").format(date);
-          return m;
+         return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
     
 

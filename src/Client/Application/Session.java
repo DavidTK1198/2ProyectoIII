@@ -54,6 +54,8 @@ public class Session {
         }
         return null;
     }
-    
+    public List<Chat> getLC(){
+        return this.lc;
+    }
     public static String USER_ATTRIBUTE="user";
 }

@@ -178,10 +178,10 @@ public class View extends javax.swing.JDialog implements Observer  {
             
             for(Message lmm : lm){
                Message ms = lmm;
-               if(ms.getDestinatario().equals(this.control.getParent().getLoggedUser().getId())){
-                   kk+= lmm.getRemitente()+": "+ lmm.getMensaje() + "               " + ms.getHora() + "\n";
+               if(ms.getRemitente().equals(this.control.getParent().getLoggedUser().getId())){
+                    kk+= lmm.getDestinatario()+": "+ lmm.getMensaje() + "              " + ms.getHora() + "\n";
                }else{
-                   kk+= lmm.getDestinatario()+": "+ lmm.getMensaje() + "              " + ms.getHora() + "\n";
+                   kk+= lmm.getRemitente()+": "+ lmm.getMensaje() + "               " + ms.getHora() + "\n";
                }
             }
             this.AreaTexto.setText(kk);

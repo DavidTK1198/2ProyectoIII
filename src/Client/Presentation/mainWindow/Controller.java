@@ -59,14 +59,29 @@ public class Controller {
     public void agregarContacto(User c) throws Exception {
 
         User modelo = Parent.getLoggedUser();
+
         try {
             if (modelo.getId().equals(c.getId())) {
                 throw new Exception("No se permite ingresarse de contacto a si mismo");
             }
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             return;
         }
+        try {
+
+            if (modelo.getUser(c.getId()) != null) {
+                throw new Exception("El contacto ya existe");
+            }
+
+        } catch (Exception ex) {
+            if (!modelo.getUser().isEmpty()) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+                return;
+            }
+        }
+
         this.Parent.getLoggedUser().addUser(c);
         this.Parent.nuevoUsuarioAnadido(c);
         model.setLista(this.Parent.getLoggedUser().getUser());
@@ -74,6 +89,7 @@ public class Controller {
 
     public void logout() {
         this.Parent.logout();
+
     }
 
     public void WhoChat(User us) {
