@@ -22,6 +22,9 @@ public class Controller {
     Client.Presentation.mainWindow.Model main_model;
     Client.Presentation.mainWindow.View main_Vista;
     Client.Presentation.mainWindow.Controller main_control;
+    Client.Presentation.chat.Controller control_chat;
+    Client.Presentation.chat.Model control_Model;
+    Client.Presentation.chat.View control_View;
     ServiceProxy localService;
 
     public Controller(View vista, Model model) {
@@ -36,9 +39,13 @@ public class Controller {
 
     public void initOptions() {
         this.main_model = new Client.Presentation.mainWindow.Model();
+        this.control_Model = new Client.Presentation.chat.Model();
+        this.control_View = new Client.Presentation.chat.View(vista, true);
         this.main_Vista = new Client.Presentation.mainWindow.View(this.vista, true);
         this.main_control = new Client.Presentation.mainWindow.Controller(this.main_Vista, this.main_model);
+        this.control_chat = new Client.Presentation.chat.Controller(control_View,control_Model);        
         this.main_control.setParent(this);
+        this.control_chat.setParent(this);
         localService = (ServiceProxy) ServiceProxy.instance();
         localService.setController(this);
 
@@ -51,7 +58,7 @@ public class Controller {
     }
 
     public void Chat_Close() {
-
+        this.control_View.hide();
     }
 
     public void Main_Close() {
@@ -60,6 +67,9 @@ public class Controller {
 
     public void show() {
         this.vista.setVisible(true);
+    }
+    public void showChat(){
+        this.control_View.show();
     }
 
     public void Hide() {
@@ -139,6 +149,9 @@ public class Controller {
             this.model.setContactUser(new User());
           
         }catch(Exception e){}
+    }
+    public void WhoChat(User us){
+        this.control_chat.setCurrentContact(us);
     }
 
    

@@ -18,6 +18,7 @@ public class Message implements Serializable {
     String fecha;
     String destinatario;
     String Remitente;
+    String mensaje;
 
     public String getFecha() {
         return fecha;
@@ -31,18 +32,40 @@ public class Message implements Serializable {
         return Remitente;
     }
 
-    public Message(String destinatario, String Remitente) {
-         Date date = new Date();
+    public Message(String destinatario, String Remitente, String mensaje) {
+        Date date = new Date();
         fecha = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(date);
         this.destinatario = destinatario;
         this.Remitente = Remitente;
+        this.mensaje = mensaje;
     }
+
     public Message() {
         this.fecha = "";
-        this.destinatario ="";
+        this.destinatario = "";
         this.Remitente = "";
+        this.mensaje = "";
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return mensaje;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public void setDestinatario(String destinatario) {
+        this.destinatario = destinatario;
+    }
+
+    public void setRemitente(String Remitente) {
+        this.Remitente = Remitente;
+    }
 
 }

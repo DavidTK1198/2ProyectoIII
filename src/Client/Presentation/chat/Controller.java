@@ -3,10 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Client.Presentation.mainWindow;
+package Client.Presentation.chat;
 
 import Client.Application.Session;
+import Client.Logic.Chat;
+import chatProtocol.Message;
 import chatProtocol.User;
+import java.util.List;
 
 /**
  *
@@ -17,14 +20,15 @@ public class Controller {
     private View vista;
     private Model model;
     private Client.Presentation.login.Controller Parent;
+   
 
     public Controller(View vista, Model model) {
         this.vista = vista;
         this.model = model;
         vista.setControl(this);
         vista.setModel(model);
-       
     }
+    
 
     public Client.Presentation.login.Controller getParent() {
         return Parent;
@@ -35,7 +39,6 @@ public class Controller {
     }
 
     public void show() {
-        this.preSet();
         vista.setVisible(true);
 
     }
@@ -45,33 +48,32 @@ public class Controller {
     }
 
     public void buscarPorID(String ced) {
-
+        
     }
 
-    public void preSet() {
-        User perfilito = this.Parent.getLoggedUser();
-        model.setLista(perfilito.getUser());
-        model.setNombre(perfilito.getId());
+    public void deliver(Message message) {
+        model.getMessages().add(message);
         model.commit();
     }
-
-    public void agregarContacto(User c) throws Exception {
-       
-        User modelo = Parent.getLoggedUser();
-         User whatever = (User)Session.instance().getAttribute("user");
-        this.Parent.getLoggedUser().addUser(c);
-        this.Parent.nuevoUsuarioAnadido(c);
-        model.setLista( this.Parent.getLoggedUser().getUser());
+    public void setCurrentContact(User c){
+        User profi = (User) Session.instance().getAttribute(Session.USER_ATTRIBUTE);
+        model.setRemitente(profi.getId());
+        List<User> lc = profi.getUser();
+        for(int i=0; i<lc.size(); i++){
+            if(lc.get(i).getId().equals(c.getId())){
+                Chat cc = Session.instance().buscarChat(lc.get(i).getId());
+                if(cc == null){
+                    cc = new Chat(c.getId());
+                    Session.instance().addChats(cc);
+                }
+                model.setMessages(cc.getMensajes());//falta mensajes
+                model.setContacto(c.getId());
+                break;
+            }
+        }
+        
+        model.commit();
+        this.show();
+        
     }
-
-    public void logout() {
-        this.Parent.logout();
-    }
-
-    public void WhoChat(User us) {
-        this.Parent.WhoChat(us);
-    }
-
 }
-
-

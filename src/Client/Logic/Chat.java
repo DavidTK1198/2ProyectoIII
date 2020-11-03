@@ -43,5 +43,8 @@ public class Chat {
         this.idContacto = "";
         this.mensajes = new ArrayList<>();
     }
+    public void addMsj(Message men){
+        mensajes.add(men);
+    }
 
 }
