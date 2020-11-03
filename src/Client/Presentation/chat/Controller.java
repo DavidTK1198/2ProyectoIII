@@ -52,7 +52,7 @@ public class Controller {
     }
 
     public void deliver(Message message) {
-        model.getMessages().add(message);
+        model.getNuevoChat().addMsj(message);
         model.commit();
     }
     public void setCurrentContact(User c){

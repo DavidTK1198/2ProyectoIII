@@ -44,6 +44,10 @@ public class Server {
                             User user = (User) in.readObject();
                             try {
                                 user = Service.instance().login(user);
+                                boolean bus = this.validaUnicoUsuario(user);
+                                if(bus){
+                                    throw new Exception();
+                                }
                                 out.writeInt(Protocol.ERROR_NO_ERROR);
                                 out.writeObject(user);
                                 out.flush();
@@ -91,6 +95,7 @@ public class Server {
             User n = wk.getUser();
             if (n.getId().equals(message.getDestinatario())) {
                 wk.deliver(message);
+                break;
             }
         }
     }
@@ -108,6 +113,14 @@ public class Server {
                 break;
             }
         }
+    }
+    public boolean validaUnicoUsuario(User usu){
+        for (Worker wk : workers) {
+            if (wk.user.equals(usu)) {
+                 return true;
+            }
+        }
+        return false;
     }
 
     public void notify(User nuevo,int numerito) {

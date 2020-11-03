@@ -29,6 +29,7 @@ public class View extends javax.swing.JDialog implements Observer {
     public View(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
        
     
     }
@@ -369,9 +370,8 @@ public class View extends javax.swing.JDialog implements Observer {
         User contacto = new User(nombreContacto,cedula);
         try{
               this.control.agregarContacto(contacto);
-              
-              
-              
+              this.IDCont.setText("");
+              this.NomC.setText("");           
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,e.getMessage());
             return;
@@ -393,6 +393,9 @@ public class View extends javax.swing.JDialog implements Observer {
         int numero = this.TContacts.getSelectedRow();
         if(numero>-1){
             User contacto = model.getTable().getRowAt(numero);
+            if(contacto.isEstado() == false){
+                JOptionPane.showMessageDialog(null, "Advertencia: Los mensajes no le llegaran al destinatario al encontrarse offline");
+            }
             this.control.WhoChat(contacto);
             
             

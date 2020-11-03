@@ -9,6 +9,7 @@ import Client.Application.Session;
 import chatProtocol.Message;
 import chatProtocol.User;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -43,7 +44,7 @@ public class Controller {
         this.control_View = new Client.Presentation.chat.View(vista, true);
         this.main_Vista = new Client.Presentation.mainWindow.View(this.vista, true);
         this.main_control = new Client.Presentation.mainWindow.Controller(this.main_Vista, this.main_model);
-        this.control_chat = new Client.Presentation.chat.Controller(control_View,control_Model);        
+        this.control_chat = new Client.Presentation.chat.Controller(control_View, control_Model);
         this.main_control.setParent(this);
         this.control_chat.setParent(this);
         localService = (ServiceProxy) ServiceProxy.instance();
@@ -68,7 +69,8 @@ public class Controller {
     public void show() {
         this.vista.setVisible(true);
     }
-    public void showChat(){
+
+    public void showChat() {
         this.control_View.show();
     }
 
@@ -78,34 +80,36 @@ public class Controller {
 
     public void login(User profi) throws Exception {
 
-        User s=ServiceProxy.instance().login(profi);
+        User s = ServiceProxy.instance().login(profi);
         Session.instance().setAttibute(Session.USER_ATTRIBUTE, s);
         model.setCurrentUser(s);
         this.Hide();
         this.MainShow();
         model.commit();
     }
-    public void registrarse(User p)throws Exception{
+
+    public void registrarse(User p) throws Exception {
         User registered = ServiceProxy.instance().Registro(p);
         Session.instance().setAttibute(Session.USER_ATTRIBUTE, registered);
         model.setCurrentUser(registered);
         this.Hide();
         this.MainShow();
         model.commit();
-        
+
     }
-    public void nuevoUsuarioAnadido(User P){
+
+    public void nuevoUsuarioAnadido(User P) {
         ServiceProxy.instance().nuevoContactoAnadido(P);
-        
+
     }
 
     public void post(Message nuevo) {
 
         ServiceProxy.instance().post(nuevo);
         model.commit();
-        
+
     }
-    
+
     public void logout() {
         try {
             ServiceProxy.instance().logout(model.getCurrentUser());
@@ -121,58 +125,45 @@ public class Controller {
     public void exit() {
         System.exit(0);
     }
-    
-   public User getLoggedUser(){
+
+    public User getLoggedUser() {
         return model.getCurrentUser();
     }
+
     public void deliver(Message message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        this.control_chat.deliver(message);
+        if (!this.control_View.isShowing()) {
+            JOptionPane.showMessageDialog(null, "Mensaje recibido de: " + message.getRemitente());
+        }  
     }
 
     public void Update(User u1) {
         User usurio = model.getCurrentUser();
-        try{
-            User usuria= usurio.getUser(u1.getId());
+        try {
+            User usuria = usurio.getUser(u1.getId());
             usuria.setEstado(true);
             this.main_model.setLista(usurio.getUser());
             this.model.setContactUser(new User());
-          
-        }catch(Exception e){}
+
+        } catch (Exception e) {
+        }
     }
-    
+
     public void IsOff(User u1) {
         User usurio = model.getCurrentUser();
-        try{
-            User usuria= usurio.getUser(u1.getId());
+        try {
+            User usuria = usurio.getUser(u1.getId());
             usuria.setEstado(false);
             this.main_model.setLista(usurio.getUser());
             this.model.setContactUser(new User());
-          
-        }catch(Exception e){}
+
+        } catch (Exception e) {
+        }
     }
-    public void WhoChat(User us){
+
+    public void WhoChat(User us) {
         this.control_chat.setCurrentContact(us);
     }
 
-   
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -152,6 +152,7 @@ public class View extends javax.swing.JDialog implements Observer  {
         String remi = this.model.getRemitente();
         Message men = new Message(dest,remi,s);
         this.model.getNuevoChat().addMsj(men);
+        this.control.getParent().post(men);
         this.mensaje.setText("");
         model.commit();
        
@@ -174,8 +175,14 @@ public class View extends javax.swing.JDialog implements Observer  {
             return;
         }else{
             String kk = "";
+            
             for(Message lmm : lm){
-               kk += lmm.getMensaje() + "\n";
+               Message ms = lmm;
+               if(ms.getDestinatario().equals(this.control.getParent().getLoggedUser().getId())){
+                   kk+= lmm.getRemitente()+": "+ lmm.getMensaje() + "               " + ms.getHora() + "\n";
+               }else{
+                   kk+= lmm.getDestinatario()+": "+ lmm.getMensaje() + "              " + ms.getHora() + "\n";
+               }
             }
             this.AreaTexto.setText(kk);
         }

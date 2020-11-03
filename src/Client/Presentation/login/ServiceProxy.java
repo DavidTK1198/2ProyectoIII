@@ -58,7 +58,7 @@ public class ServiceProxy implements IService{
             }
             else {
                 disconnect();
-                throw new Exception("No remote user");
+                throw new Exception("Error al iniciar sesion");
             }            
         } catch (IOException | ClassNotFoundException ex) {
             return null;

@@ -7,6 +7,7 @@ package Client.Presentation.mainWindow;
 
 import Client.Application.Session;
 import chatProtocol.User;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,7 +24,7 @@ public class Controller {
         this.model = model;
         vista.setControl(this);
         vista.setModel(model);
-       
+
     }
 
     public Client.Presentation.login.Controller getParent() {
@@ -56,12 +57,19 @@ public class Controller {
     }
 
     public void agregarContacto(User c) throws Exception {
-       
+
         User modelo = Parent.getLoggedUser();
-         User whatever = (User)Session.instance().getAttribute("user");
+        try {
+            if (modelo.getId().equals(c.getId())) {
+                throw new Exception("No se permite ingresarse de contacto a si mismo");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return;
+        }
         this.Parent.getLoggedUser().addUser(c);
         this.Parent.nuevoUsuarioAnadido(c);
-        model.setLista( this.Parent.getLoggedUser().getUser());
+        model.setLista(this.Parent.getLoggedUser().getUser());
     }
 
     public void logout() {
@@ -73,5 +81,3 @@ public class Controller {
     }
 
 }
-
-
