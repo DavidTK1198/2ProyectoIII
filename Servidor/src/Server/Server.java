@@ -22,7 +22,7 @@ public class Server {
         try {
             srv = new ServerSocket(Protocol.PORT);
             workers = Collections.synchronizedList(new ArrayList<Worker>());
-         
+
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex.getCause());
         }
@@ -50,17 +50,17 @@ public class Server {
                                 Worker worker = new Worker(skt, in, out, user);
                                 workers.add(worker);
                                 worker.start();
-                                this.notify(user);
+                                this.notify(user,1);
                                 break;
                             } catch (Exception ex) {
                                 out.writeInt(Protocol.ERROR_LOGIN);
                                 out.flush();
                             }
-                           
-                        }        
-                         case Protocol.REGISTER:
-                             User nuevoUsuario = (User) in.readObject();
-                             try{
+
+                        }
+                        case Protocol.REGISTER:
+                            User nuevoUsuario = (User) in.readObject();
+                            try {
                                 nuevoUsuario = Service.instance().Registro(nuevoUsuario);
                                 out.writeInt(Protocol.ERROR_NO_ERROR);
                                 out.writeObject(nuevoUsuario);
@@ -70,11 +70,11 @@ public class Server {
                                 worker.start();
                                 worker.setServ(this);
                                 break;
-                             }catch(Exception ex){
-                                 out.writeInt(Protocol.ERROR_REGISTER);
-                                 out.flush();
-                             }
-                        
+                            } catch (Exception ex) {
+                                out.writeInt(Protocol.ERROR_REGISTER);
+                                out.flush();
+                            }
+
                     }
                 } catch (ClassNotFoundException ex) {
                     System.out.println("hoola");
@@ -96,9 +96,11 @@ public class Server {
     }
 
     public void remove(User u) {
+        this.notify(u, 2);
         for (Worker wk : workers) {
             if (wk.user.equals(u)) {
                 workers.remove(wk);
+                
                 try {
                     wk.skt.close();
                 } catch (IOException ex) {
@@ -107,21 +109,34 @@ public class Server {
             }
         }
     }
+
+    public void notify(User nuevo,int numerito) {
+        boolean flag = true;
+        if(numerito == 1){
+            flag = false;
+        for (Worker wk : workers) {
+            if (wk.getUser().getId().equals(nuevo.getId())) {
+                flag = true;
+                break;
+            }
+        }
+        }
+
+        if (flag) {
+            for (Worker wk : workers) {
+                if (!wk.getUser().getId().equals(nuevo.getId())) {
+                    switch(numerito){
+                        case 1:
+                            wk.notifiqueON(nuevo);
+                            break;
+                        case 2:
+                            wk.notifiqueOFF(nuevo);
+                            break;
+                    }
+                }
+            }
+        }
+    }
     
-    
-      public void notify(User nuevo){
-          for(Worker wk : workers){
-              if(wk.getUser().getId() != nuevo.getId())
-                wk.notifiqueON(nuevo);
-          }
-      }
-    
+
 }
-
-
-
-
-
-
-
-

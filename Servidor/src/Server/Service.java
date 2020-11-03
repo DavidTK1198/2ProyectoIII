@@ -40,7 +40,7 @@ public class Service implements IService{
     } 
 
     public void logout(User p) throws Exception{
-        srv.remove(p);
+        srv.remove(p);   
     }
 
   
@@ -62,7 +62,7 @@ public class Service implements IService{
 
     @Override
     public void nuevoContactoAnadido(User us) {
-        this.srv.notify(us);
+        this.srv.notify(us,1);
     }
     
 }

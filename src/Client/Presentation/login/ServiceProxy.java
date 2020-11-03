@@ -69,6 +69,7 @@ public class ServiceProxy implements IService{
         out.writeInt(Protocol.LOGOUT);
         out.writeObject(u);
         out.flush();
+        
         this.stop();
         this.disconnect();
     }
