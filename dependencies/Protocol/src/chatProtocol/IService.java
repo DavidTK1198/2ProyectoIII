@@ -7,7 +7,8 @@ public interface IService {
     public User Registro(User usuario)throws Exception;
     public void logout(User u) throws Exception; 
     public void post(Message message);
-    public void update(List<User> us) throws Exception;
+    public void nuevoContactoAnadido(User us);
+ 
 }
 
 

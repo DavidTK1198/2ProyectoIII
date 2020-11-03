@@ -5,6 +5,7 @@
  */
 package Client.Presentation.mainWindow;
 
+import Client.Application.Session;
 import chatProtocol.User;
 
 /**
@@ -22,7 +23,7 @@ public class Controller {
         this.model = model;
         vista.setControl(this);
         vista.setModel(model);
-
+       
     }
 
     public Client.Presentation.login.Controller getParent() {
@@ -50,13 +51,17 @@ public class Controller {
     public void preSet() {
         User perfilito = this.Parent.getLoggedUser();
         model.setLista(perfilito.getUser());
+        model.setNombre(perfilito.getId());
         model.commit();
     }
 
     public void agregarContacto(User c) throws Exception {
-        User perfilito = this.Parent.getLoggedUser();
-        perfilito.addUser(c);
-        model.setLista(perfilito.getUser());
+       
+        User modelo = Parent.getLoggedUser();
+         User whatever = (User)Session.instance().getAttribute("user");
+        this.Parent.getLoggedUser().addUser(c);
+        this.Parent.nuevoUsuarioAnadido(c);
+        model.setLista( this.Parent.getLoggedUser().getUser());
     }
 
     public void logout() {

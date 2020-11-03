@@ -22,6 +22,7 @@ public class Model extends Observable {
     private int[] col = {0, 1};
     private List<User> lista;
     private boolean editable;
+    private String nombre;
 
     public void addObserver(Observer a) {
 
@@ -35,10 +36,19 @@ public class Model extends Observable {
         table = new TableModel(lista, col);
         editable = false;
         this.contact = new User();
+        nombre = "";
     }
 
     public boolean isEditable() {
         return editable;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public void setEditable(boolean editable) {
@@ -82,7 +92,7 @@ public class Model extends Observable {
         return table.getRowAt(n);
     }
 
-    void commit() {
+    public void commit() {
         this.contact = new User();
         this.setChanged();
         this.notifyObservers();

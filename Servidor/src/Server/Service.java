@@ -43,11 +43,7 @@ public class Service implements IService{
         srv.remove(p);
     }
 
-    @Override
-    public void update(List<User> list) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+  
     @Override
     public User Registro(User usuario) throws Exception {
          
@@ -63,6 +59,12 @@ public class Service implements IService{
         throw new Exception("Usuario ya existe");
         }                  
     }  
+
+    @Override
+    public void nuevoContactoAnadido(User us) {
+        this.srv.NuevosContactos(us);
+    }
+    
 }
 
 

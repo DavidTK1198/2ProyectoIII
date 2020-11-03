@@ -1,5 +1,6 @@
 package Client.Presentation.login;
 
+import Client.Application.Session;
 import chatProtocol.User;
 import chatProtocol.Protocol;
 import chatProtocol.Message;
@@ -11,6 +12,8 @@ import java.net.Socket;
 import javax.swing.SwingUtilities;
 import chatProtocol.IService;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ServiceProxy implements IService{
     private static IService theInstance;
@@ -82,6 +85,14 @@ public class ServiceProxy implements IService{
         } 
         catch (IOException ex) {}   
     }  
+    public void nuevoContactoAnadido(User us){
+         try {
+            out.writeInt(Protocol.CONECTADO);
+            out.writeObject(us);
+            out.flush();            
+        } 
+        catch (IOException ex) {}   
+    }
     
     // LISTENING FUNCTIONS
    boolean continuar = true;    
@@ -111,13 +122,17 @@ public class ServiceProxy implements IService{
                     } 
                     catch (ClassNotFoundException ex) {}
                     break;
-                    
+                case Protocol.CONECTADO:
+                    User u1=(User) in.readObject();
+                    this.controller.Update(u1);
+                    break;
                 }
-                
-                
+         
                 out.flush();
-            } catch (IOException  ex) {
+            } catch (IOException ex) {
                 continuar = false;
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ServiceProxy.class.getName()).log(Level.SEVERE, null, ex);
             }                        
         }
     }
@@ -155,10 +170,6 @@ public class ServiceProxy implements IService{
         }
     }
 
-    @Override
-    public void update(List<User> us) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
 
 

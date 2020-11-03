@@ -13,6 +13,9 @@ public class Protocol {
 
     public static final int DELIVER=1;
     public static final int UPDATE=4;
+    public static final int CONECTADO = 6;
+    public static final int DESCONECTADO = 7;
+    
     
     public static final int ERROR_NO_ERROR=0;
     public static final int ERROR_LOGIN=1;

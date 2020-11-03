@@ -84,6 +84,10 @@ public class Controller {
         model.commit();
         
     }
+    public void nuevoUsuarioAnadido(User P){
+        ServiceProxy.instance().nuevoContactoAnadido(P);
+        
+    }
 
     public void post(Message nuevo) {
 
@@ -92,10 +96,6 @@ public class Controller {
         
     }
     
-    public void update(List<User> us) throws Exception{
-        ServiceProxy.instance().update(us);
-    }
-
     public void logout() {
         try {
             ServiceProxy.instance().logout(model.getCurrentUser());
@@ -112,12 +112,24 @@ public class Controller {
         System.exit(0);
     }
     
-   public  User getLoggedUser(){
+   public User getLoggedUser(){
         return model.getCurrentUser();
     }
     public void deliver(Message message) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public void Update(User u1) {
+        User usurio = model.getCurrentUser();
+        try{
+            User usuria= usurio.getUser(u1.getId());
+            usuria.setEstado(true);
+            this.main_model.setLista(usurio.getUser());
+            this.model.setContactUser(new User());
+          
+        }catch(Exception e){}
+    }
+    
 
    
 

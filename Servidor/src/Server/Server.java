@@ -17,13 +17,12 @@ public class Server {
 
     ServerSocket srv;
     List<Worker> workers;
-    List<User> conectados;
 
     public Server() {
         try {
             srv = new ServerSocket(Protocol.PORT);
             workers = Collections.synchronizedList(new ArrayList<Worker>());
-            conectados = new ArrayList<>();
+         
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex.getCause());
         }
@@ -51,7 +50,7 @@ public class Server {
                                 Worker worker = new Worker(skt, in, out, user);
                                 workers.add(worker);
                                 worker.start();
-                                worker.setServ(this);
+                                this.notify(user);
                                 break;
                             } catch (Exception ex) {
                                 out.writeInt(Protocol.ERROR_LOGIN);
@@ -108,20 +107,20 @@ public class Server {
             }
         }
     }
-      public void usuariosConectados(User usuario){
-          if(workers.size() == 1){
-              return;
+    
+    
+      public void notify(User nuevo){
+          for(Worker wk : workers){
+              if(wk.getUser().getId() != nuevo.getId())
+                wk.notifiqueON(nuevo);
           }
-          for(int i=0; i<this.workers.size(); i++){
-              if(usuario.getId().equals(workers.get(i).getUser().getId())){
-                  conectados.add(usuario);
-              }
+      }
+      public void NuevosContactos(User nuevecito){
+          for(Worker wk : workers){
+              if(wk.getUser().getId() == nuevecito.getId())
+                wk.notifiqueON(nuevecito);
           }
-         
-    }
-
-
-
+      }
 }
 
 

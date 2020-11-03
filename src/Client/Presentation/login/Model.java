@@ -16,14 +16,24 @@ import chatProtocol.User;
 
 public class Model extends java.util.Observable {
     User currentUser;
+    User contactUser;
 
     public Model() {
        currentUser = new User();
+       this.contactUser = new User();
       
      
     }
 
-    public User getCurrentUser() {
+    public User getContactUser() {
+        return contactUser;
+    }
+
+    public void setContactUser(User contactUser) {
+        this.contactUser = contactUser;
+    }
+
+    public User getCurrentUser() {///M
         return currentUser;
     }
 

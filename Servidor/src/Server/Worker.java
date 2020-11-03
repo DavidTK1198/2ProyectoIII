@@ -9,6 +9,8 @@ import chatProtocol.Message;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Worker {
 
@@ -79,18 +81,16 @@ public class Worker {
                         } catch (ClassNotFoundException ex) {
                         }
                         break;
-                    case Protocol.UPDATE:
-                        List<User> us = null;
-                        try {
-                            us = (List<User>) in.readObject();
-                            this.toSend(us);
-                        } catch (ClassNotFoundException ex) {
-                        }
-                        break;
+                    case Protocol.CONECTADO:
+                        User nuevo = (User)in.readObject();
+                        Service.instance().nuevoContactoAnadido(nuevo);
+                        
                 }
                 out.flush();
             } catch (IOException ex) {
                 continuar = false;
+            } catch (ClassNotFoundException ex) {
+               
             }
         }
     }
@@ -103,21 +103,26 @@ public class Worker {
         } catch (IOException ex) {
         }
     }
-
-    public void toSend(List<User> us) throws IOException, ClassNotFoundException {
-
-        
-
-        for (int i = 0; i < us.size(); i++) {
-            User conec = us.get(i);
-            serv.usuariosConectados(conec);
-        }
-            out.writeInt(Protocol.UPDATE);
-            out.writeObject(serv.conectados);
+    public void notifiqueON(User us){
+          try {
+            
+            out.writeInt(Protocol.CONECTADO);
+            out.writeObject(us);
             out.flush();
-            serv.conectados = new ArrayList<>();
+            
+        } catch (IOException ex) {
         }
-    
+    }
+    public void notifiqueOFF(User us){
+            try {
+            
+            out.writeInt(Protocol.DESCONECTADO);
+            out.writeObject(us);
+            out.flush();
+            
+        } catch (IOException ex) {
+        }
+    }
 
 }
 
