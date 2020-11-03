@@ -5,7 +5,6 @@
  */
 package Client.Presentation.mainWindow;
 
-import Client.Application.Session;
 import chatProtocol.User;
 import javax.swing.JOptionPane;
 
@@ -59,6 +58,7 @@ public class Controller {
     public void agregarContacto(User c) throws Exception {
 
         User modelo = Parent.getLoggedUser();
+       
 
         try {
             if (modelo.getId().equals(c.getId())) {
@@ -76,15 +76,16 @@ public class Controller {
             }
 
         } catch (Exception ex) {
-            if (!modelo.getUser().isEmpty()) {
-                JOptionPane.showMessageDialog(null, ex.getMessage());
-                return;
-            }
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return;
+
         }
 
         this.Parent.getLoggedUser().addUser(c);
         this.Parent.nuevoUsuarioAnadido(c);
         model.setLista(this.Parent.getLoggedUser().getUser());
+
     }
 
     public void logout() {
@@ -97,3 +98,4 @@ public class Controller {
     }
 
 }
+

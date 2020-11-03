@@ -96,10 +96,10 @@ public class User implements Serializable {
         }
     }
 
-    public User getUser(String ps) throws Exception {
+    public User getUser(String ps)  {
         User p = this.contacts.get(ps);
         if (p == null) {
-            throw new Exception("No se encontro al elemento");
+            return null;
         }
         return p;
     }
@@ -121,6 +121,7 @@ public class User implements Serializable {
     }
 
 }
+
 
 
 
