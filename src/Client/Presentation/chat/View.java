@@ -16,12 +16,11 @@ import javax.swing.JTextArea;
  *
  * @author DavidTK1198
  */
-public class View extends javax.swing.JDialog implements Observer  {
+public class View extends javax.swing.JDialog implements Observer {
 
     /**
      * Creates new form View
      */
-    
     private Controller control;
     private Model model;
 
@@ -29,15 +28,17 @@ public class View extends javax.swing.JDialog implements Observer  {
         super(parent, modal);
         initComponents();
     }
-  public void setControl(Controller control) {
+
+    public void setControl(Controller control) {
         this.control = control;
     }
 
     public void setModel(Model model) {
-        
+
         this.model = model;
         model.addObserver(this);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -141,22 +142,21 @@ public class View extends javax.swing.JDialog implements Observer  {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mensajeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mensajeMouseClicked
-       
-        
-        
+
+
     }//GEN-LAST:event_mensajeMouseClicked
 
     private void enviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enviarMouseClicked
         String s = this.mensaje.getText();
         String dest = this.model.getNombrePersona();
         String remi = this.model.getRemitente();
-        Message men = new Message(dest,remi,s);
+        Message men = new Message(dest, remi, s);
         this.model.getNuevoChat().addMsj(men);
         this.control.getParent().post(men);
         this.mensaje.setText("");
         model.commit();
-       
-         
+
+
     }//GEN-LAST:event_enviarMouseClicked
 
     @Override
@@ -169,24 +169,34 @@ public class View extends javax.swing.JDialog implements Observer  {
     /**
      * @param args the command line arguments
      */
-    public void setTextos(){
+    public void setTextos() {
+        boolean flag = false;
         List<Message> lm = model.getMessages();
-        if(lm.isEmpty()){
+        if (lm.isEmpty()) {
             return;
-        }else{
+        } else {
             String kk = "";
-            
-            for(Message lmm : lm){
-               Message ms = lmm;
-               if(ms.getRemitente().equals(this.control.getParent().getLoggedUser().getId())){
-                    kk+= lmm.getDestinatario()+": "+ lmm.getMensaje() + "              " + ms.getHora() + "\n";
-               }else{
-                   kk+= lmm.getRemitente()+": "+ lmm.getMensaje() + "               " + ms.getHora() + "\n";
-               }
+
+            for (Message lmm : lm) {
+                Message ms = lmm;
+                flag = false;
+                if (ms.getRemitente().equals(this.control.getParent().getLoggedUser().getId()) && flag == false) {
+                    kk += lmm.getRemitente() + ": " + lmm.getMensaje() + "               " + ms.getHora() + "\n";
+                    flag = true;
+                }
+
+                if (flag ==false) {
+
+                    if (ms.getDestinatario().equals(this.control.getParent().getLoggedUser().getId()) && flag == false) {
+                        kk += lmm.getRemitente() + ": " + lmm.getMensaje() + "               " + ms.getHora() + "\n";
+                        flag = true;
+                    }
+                }
+
             }
             this.AreaTexto.setText(kk);
         }
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -199,4 +209,3 @@ public class View extends javax.swing.JDialog implements Observer  {
     private javax.swing.JTextField mensaje;
     // End of variables declaration//GEN-END:variables
 }
-
