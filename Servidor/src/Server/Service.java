@@ -62,10 +62,11 @@ public class Service implements IService{
 
     @Override
     public void nuevoContactoAnadido(User us) {
-        this.srv.NuevosContactos(us);
+        this.srv.notify(us);
     }
     
 }
+
 
 
 

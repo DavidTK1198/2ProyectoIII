@@ -115,13 +115,12 @@ public class Server {
                 wk.notifiqueON(nuevo);
           }
       }
-      public void NuevosContactos(User nuevecito){
-          for(Worker wk : workers){
-              if(wk.getUser().getId() == nuevecito.getId())
-                wk.notifiqueON(nuevecito);
-          }
-      }
+    
 }
+
+
+
+
 
 
 

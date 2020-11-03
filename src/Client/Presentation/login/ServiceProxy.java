@@ -1,6 +1,5 @@
 package Client.Presentation.login;
 
-import Client.Application.Session;
 import chatProtocol.User;
 import chatProtocol.Protocol;
 import chatProtocol.Message;
@@ -11,9 +10,6 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import javax.swing.SwingUtilities;
 import chatProtocol.IService;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ServiceProxy implements IService{
     private static IService theInstance;
@@ -124,7 +120,13 @@ public class ServiceProxy implements IService{
                     break;
                 case Protocol.CONECTADO:
                     User u1=(User) in.readObject();
-                    this.controller.Update(u1);
+                    this.updater(u1);
+                    
+                    break;
+                    
+                case Protocol.DESCONECTADO:
+                    User u2=(User) in.readObject();
+                    this.updater2(u2);
                     break;
                 }
          
@@ -132,12 +134,28 @@ public class ServiceProxy implements IService{
             } catch (IOException ex) {
                 continuar = false;
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(ServiceProxy.class.getName()).log(Level.SEVERE, null, ex);
+              
             }                        
         }
     }
     
-  
+  private void updater2( final User  us ){
+      SwingUtilities.invokeLater(new Runnable(){
+            public void run(){
+               controller.IsOff(us);
+            }
+         }
+      );
+   }
+   
+   private void updater( final User  us ){
+      SwingUtilities.invokeLater(new Runnable(){
+            public void run(){
+               controller.Update(us);
+            }
+         }
+      );
+   }
     
    private void deliver( final Message  message ){
       SwingUtilities.invokeLater(new Runnable(){
@@ -171,6 +189,12 @@ public class ServiceProxy implements IService{
     }
 
 }
+
+
+
+
+
+
 
 
 

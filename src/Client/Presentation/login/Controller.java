@@ -130,10 +130,21 @@ public class Controller {
         }catch(Exception e){}
     }
     
+    public void IsOff(User u1) {
+        User usurio = model.getCurrentUser();
+        try{
+            User usuria= usurio.getUser(u1.getId());
+            usuria.setEstado(false);
+            this.main_model.setLista(usurio.getUser());
+            this.model.setContactUser(new User());
+          
+        }catch(Exception e){}
+    }
 
    
 
 }
+
 
 
 

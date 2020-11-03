@@ -1,7 +1,5 @@
 package chatProtocol;
 
-import java.util.List;
-
 public interface IService {
     public User login(User u) throws Exception;
     public User Registro(User usuario)throws Exception;
@@ -10,6 +8,7 @@ public interface IService {
     public void nuevoContactoAnadido(User us);
  
 }
+
 
 
 
