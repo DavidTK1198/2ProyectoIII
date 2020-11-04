@@ -9,7 +9,6 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlTransient;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 
@@ -18,7 +17,7 @@ public class User implements Serializable {
     String id;
     String clave;
     private boolean estado;
-     @XmlTransient
+
     private Map<String, User> contacts;
     private String Nombre;
 
@@ -129,6 +128,7 @@ public class User implements Serializable {
     }
 
 }
+
 
 
 

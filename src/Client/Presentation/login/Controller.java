@@ -9,8 +9,6 @@ import Client.Application.Session;
 import Client.Data.XmlPersister;
 import chatProtocol.Message;
 import chatProtocol.User;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -185,5 +183,6 @@ public class Controller {
     }
 
 }
+
 
 
