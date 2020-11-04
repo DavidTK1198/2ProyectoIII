@@ -6,6 +6,8 @@
 package Client.Presentation.mainWindow;
 
 import chatProtocol.User;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,7 +47,25 @@ public class Controller {
     }
 
     public void buscarPorID(String ced) {
+        
+        try {
+            User p = Parent.getLoggedUser().getUser(ced);
+            if (p == null) {
+                throw new Exception("El Contacto no existe");
+            }
+            List<User> lp = new ArrayList<>();
+            lp.add(p);
+            model.setLista(lp);
 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        model.setContact(new User());
+    }
+
+    public void cargarTodosLosContactos() {
+        List<User> lp = Parent.getLoggedUser().getUser();
+        model.setLista(lp);
     }
 
     public void preSet() {
@@ -58,7 +78,6 @@ public class Controller {
     public void agregarContacto(User c) throws Exception {
 
         User modelo = Parent.getLoggedUser();
-       
 
         try {
             if (modelo.getId().equals(c.getId())) {
@@ -98,4 +117,5 @@ public class Controller {
     }
 
 }
+
 

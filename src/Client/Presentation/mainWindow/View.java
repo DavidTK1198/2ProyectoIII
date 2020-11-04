@@ -24,17 +24,14 @@ public class View extends javax.swing.JDialog implements Observer {
     private Controller control;
     private Model model;
 
-   
-
     public View(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-       
-    
+
     }
-    
-     public void setControl(Controller control) {
+
+    public void setControl(Controller control) {
         this.control = control;
     }
 
@@ -85,16 +82,16 @@ public class View extends javax.swing.JDialog implements Observer {
         jTextField1.setBorder(null);
         jTextField1.setCaretColor(new java.awt.Color(255, 255, 255));
         jTextField1.setPreferredSize(new java.awt.Dimension(2, 20));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
 
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("estado");
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Client/Icons/icons8-search-client-20.png"))); // NOI18N
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         dia.setForeground(new java.awt.Color(255, 255, 255));
         dia.setText("fecha");
@@ -359,29 +356,25 @@ public class View extends javax.swing.JDialog implements Observer {
     private void AgrContMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AgrContMouseClicked
         String nombreContacto = this.NomC.getText();
         String cedula = this.IDCont.getText();
-        try{
-            if("".equals(cedula) || "".equals(nombreContacto)){
+        try {
+            if ("".equals(cedula) || "".equals(nombreContacto)) {
                 throw new Exception("Datos incompletos");
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
             return;
         }
-        User contacto = new User(nombreContacto,cedula);
-        try{
-              this.control.agregarContacto(contacto);
-              this.IDCont.setText("");
-              this.NomC.setText("");           
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e.getMessage());
+        User contacto = new User(nombreContacto, cedula);
+        try {
+            this.control.agregarContacto(contacto);
+            this.IDCont.setText("");
+            this.NomC.setText("");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return;
         }
 
     }//GEN-LAST:event_AgrContMouseClicked
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void salirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirMouseClicked
         // TODO add your handling code here:
@@ -389,21 +382,29 @@ public class View extends javax.swing.JDialog implements Observer {
     }//GEN-LAST:event_salirMouseClicked
 
     private void TContactsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TContactsMouseClicked
-       
+
         int numero = this.TContacts.getSelectedRow();
-        if(numero>-1){
+        if (numero > -1) {
             User contacto = model.getTable().getRowAt(numero);
-            if(contacto.isEstado() == false){
+            if (contacto.isEstado() == false) {
                 JOptionPane.showMessageDialog(null, "Advertencia: Los mensajes no le llegaran al destinatario al encontrarse offline");
             }
             this.control.WhoChat(contacto);
-            
-            
- 
+
         }
-        
-        
+
+
     }//GEN-LAST:event_TContactsMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        String n = this.jTextField1.getText();
+        if ("".equals(n)) {
+            this.control.cargarTodosLosContactos();
+        } else {
+            this.control.buscarPorID(n);
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -440,7 +441,7 @@ public class View extends javax.swing.JDialog implements Observer {
         this.jLabel2.setText(model.getNombre());
         this.jLabel11.setText(model.getContact().getId());
         this.TContacts.setModel(model.getTable());
-         Date date = new Date();
-       this.dia.setText(new SimpleDateFormat("dd/MM/yyyy").format(date) );
+        Date date = new Date();
+        this.dia.setText(new SimpleDateFormat("dd/MM/yyyy").format(date));
     }
 }

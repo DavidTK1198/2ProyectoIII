@@ -5,7 +5,6 @@
  */
 package Client.Presentation.mainWindow;
 
-
 import chatProtocol.User;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -18,7 +17,7 @@ public class TableModel extends AbstractTableModel {
 
     private List<User> filas;
     private int[] columnas;
-    private String[] nombCol = {"UserName","Estado"};
+    private String[] nombCol = {"UserName", "Estado"};
 
     public TableModel(List<User> filas, int[] columnas) {
         this.filas = filas;
@@ -41,10 +40,11 @@ public class TableModel extends AbstractTableModel {
         switch (columnIndex) {
             case 0:
                 return prod.getId();
-            case 1: 
-                if(prod.isEstado() == false){
+
+            case 1:
+                if (prod.isEstado() == false) {
                     return "offline";
-                }else{
+                } else {
                     return "online";
                 }
             default:
@@ -58,13 +58,11 @@ public class TableModel extends AbstractTableModel {
     }
 
     public User getRowAt(int n) {
+
         return filas.get(n);
     }
 
+ 
+
 }
-
-
-
-
-
 

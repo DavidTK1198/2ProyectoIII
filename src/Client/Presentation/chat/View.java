@@ -6,6 +6,7 @@
 package Client.Presentation.chat;
 
 import chatProtocol.Message;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -61,9 +62,12 @@ public class View extends javax.swing.JDialog implements Observer {
         AreaTexto.setRows(5);
         jScrollPane1.setViewportView(AreaTexto);
 
-        mensaje.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mensajeMouseClicked(evt);
+        mensaje.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                mensajeKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                mensajeKeyReleased(evt);
             }
         });
 
@@ -139,11 +143,6 @@ public class View extends javax.swing.JDialog implements Observer {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mensajeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mensajeMouseClicked
-
-
-    }//GEN-LAST:event_mensajeMouseClicked
-
     private void enviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enviarMouseClicked
         String s = this.mensaje.getText();
         String dest = this.model.getNombrePersona();
@@ -154,6 +153,31 @@ public class View extends javax.swing.JDialog implements Observer {
 
 
     }//GEN-LAST:event_enviarMouseClicked
+
+    private void mensajeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mensajeKeyPressed
+        // TODO add your handling code here:
+        String s = this.mensaje.getText();
+        String dest = this.model.getNombrePersona();
+        String remi = this.model.getRemitente();
+        Message men = new Message(dest, remi, s);
+
+        
+
+        switch (evt.getKeyCode()) {
+            case KeyEvent.VK_ENTER:
+                this.control.enviar(men);
+                break;
+            case KeyEvent.VK_ESCAPE:
+                this.control.hide();
+                break;
+
+        }
+        this.mensaje.setText("");
+    }//GEN-LAST:event_mensajeKeyPressed
+
+    private void mensajeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mensajeKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mensajeKeyReleased
 
     @Override
     public void update(Observable o, Object arg) {
@@ -177,7 +201,7 @@ public class View extends javax.swing.JDialog implements Observer {
                 Message ms = lmm;
                 flag = false;
                 if (ms.getRemitente().equals(this.control.getParent().getLoggedUser().getId()) && flag == false) {
-                    kk += lmm.getRemitente() + ": " + lmm.getMensaje() + "               " + ms.getHora() + "\n";
+                    kk += "                                                                                        "+ lmm.getRemitente() + ": " + lmm.getMensaje() + "               " + ms.getHora() + "\n";
                     flag = true;
                 }
 
