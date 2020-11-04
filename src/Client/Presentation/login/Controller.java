@@ -7,8 +7,10 @@ package Client.Presentation.login;
 
 import Client.Application.Session;
 import Client.Data.XmlPersister;
+import Client.Logic.Chat;
 import chatProtocol.Message;
 import chatProtocol.User;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -81,14 +83,27 @@ public class Controller {
     public void login(User profi) throws Exception {
 
         User s = ServiceProxy.instance().login(profi);
-        Session.instance().setAttibute(Session.USER_ATTRIBUTE, s);
 
         model.setCurrentUser(s);
         try {
             XmlPersister.getInstance().setPath(model.getCurrentUser().getId() + ".xml");
-            XmlPersister.getInstance().restore();
-        } catch (Exception e) {
+            Session.instance().setSession(XmlPersister.getInstance().restore());
 
+            Session.instance().setAttibute(Session.USER_ATTRIBUTE, s);
+            List<Chat> lc = Session.instance().getLC();
+
+            Chat nuevoCh = null;
+            for (int i = 0; i < lc.size(); i++) {
+                nuevoCh = lc.get(i);
+                User nuevoUs = new User();
+
+                nuevoUs.setId(nuevoCh.getIdContacto());
+                s.addUser(nuevoUs);
+                this.nuevoUsuarioAnadido(nuevoUs);
+            }
+
+        } catch (Exception e) {
+            Session.instance().setAttibute(Session.USER_ATTRIBUTE, s);
         }
         this.Hide();
         this.MainShow();
@@ -120,16 +135,16 @@ public class Controller {
     public void logout() {
         try {
             try {
-                
+
                 ServiceProxy.instance().logout(model.getCurrentUser());
             } catch (Exception ex) {
             }
-            
+
             XmlPersister.getInstance().store(Session.instance());
             model.setCurrentUser(null);
-            
+
             model.commit();
-            
+
             Session.instance().removeAttribute(Session.USER_ATTRIBUTE);
             this.Main_Close();
             this.show();
@@ -183,6 +198,3 @@ public class Controller {
     }
 
 }
-
-
-

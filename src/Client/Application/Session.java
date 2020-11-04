@@ -7,6 +7,7 @@
 package Client.Application;
 
 import Client.Logic.Chat;
+import chatProtocol.User;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,7 +46,7 @@ public class Session {
     }
     
     public void setAttibute(String attribute, Object value){
-        attributes.put(attribute, value);
+    attributes.put(attribute, value);
     }
     
     public void removeAttribute(String attribute){
@@ -62,11 +63,16 @@ public class Session {
         }
         return null;
     }
+
     public List<Chat> getLC(){
         return this.lc;
     }
+    public void setSession(Session s){
+        theInstance = s;
+    }
      @XmlTransient
     public static String USER_ATTRIBUTE="user";
+     
 }
 
 
