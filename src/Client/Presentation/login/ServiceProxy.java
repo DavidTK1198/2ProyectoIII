@@ -44,11 +44,7 @@ public class ServiceProxy implements IService{
     private void disconnect() throws Exception{
         skt.shutdownOutput();
         skt.close();
-          try {
-            XmlPersister.getInstance().store(Session.instance());
-        } catch (Exception ex) {
-            
-        }
+       
     }
     
     public User login(User u) throws Exception{

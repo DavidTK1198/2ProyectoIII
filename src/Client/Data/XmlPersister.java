@@ -41,8 +41,11 @@ import javax.xml.bind.Unmarshaller;
 public class XmlPersister {
 
     private static XmlPersister my_instance = null; //Singleton
+    private String path;
+   
 
     public XmlPersister() {
+          this.path = "";
     }
     public static XmlPersister getInstance() {
         if (my_instance == null) {
@@ -51,8 +54,7 @@ public class XmlPersister {
         return my_instance;
     }
     
-     private String path;
-   
+ 
 
     public void setPath(String p) {
         this.path = p;
@@ -61,7 +63,7 @@ public class XmlPersister {
   
 
     public void store(Session my_data) throws Exception {
-        JAXBContext jaxbContext = JAXBContext.newInstance(Data.class);
+        JAXBContext jaxbContext = JAXBContext.newInstance(Session.class);
         FileOutputStream os = new FileOutputStream(path);
         Marshaller nuevo = jaxbContext.createMarshaller();
         nuevo.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -73,7 +75,7 @@ public class XmlPersister {
 
     public Data restore() throws Exception {
         
-        JAXBContext jaxbContext = JAXBContext.newInstance(Data.class);
+        JAXBContext jaxbContext = JAXBContext.newInstance(Session.class);
         FileInputStream is = new FileInputStream(path);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
         Data result = (Data) unmarshaller.unmarshal(is);

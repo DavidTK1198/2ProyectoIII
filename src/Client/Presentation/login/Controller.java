@@ -9,6 +9,8 @@ import Client.Application.Session;
 import Client.Data.XmlPersister;
 import chatProtocol.Message;
 import chatProtocol.User;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -119,21 +121,23 @@ public class Controller {
 
     public void logout() {
         try {
-
-            ServiceProxy.instance().logout(model.getCurrentUser());
-
+            try {
+                
+                ServiceProxy.instance().logout(model.getCurrentUser());
+            } catch (Exception ex) {
+            }
+            
             XmlPersister.getInstance().store(Session.instance());
-
+            model.setCurrentUser(null);
+            
+            model.commit();
+            
+            Session.instance().removeAttribute(Session.USER_ATTRIBUTE);
+            this.Main_Close();
+            this.show();
         } catch (Exception ex) {
+            System.out.println(ex.getCause());
         }
-
-        model.setCurrentUser(null);
-
-        model.commit();
-
-        Session.instance().removeAttribute(Session.USER_ATTRIBUTE);
-        this.Main_Close();
-        this.show();
     }
 
     public void exit() {
