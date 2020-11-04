@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Client.Presentation.chat;
 
 import Client.Logic.Chat;
@@ -14,19 +13,21 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * 
+ *
  * @author DavidTK1198
  */
 public class Model extends Observable {
-    
-    List<Message> messages;;
+
+    List<Message> messages;
+    ;
     Chat nuevoChat;
     Message mensaje;
     String nombrePersona;
     String remitente;
+
     @Override
-      public void addObserver(Observer a) {
-       
+    public void addObserver(Observer a) {
+
         super.addObserver(a);
         refresh();
     }
@@ -37,15 +38,16 @@ public class Model extends Observable {
         this.mensaje = new Message();
         this.nombrePersona = "";
         this.remitente = "";
-        
+
     }
-      
-        private void refresh(){
+
+    private void refresh() {
         this.setChanged();
         this.notifyObservers();
-        
+
     }
-       public Chat getNuevoChat() {
+
+    public Chat getNuevoChat() {
         return nuevoChat;
     }
 
@@ -68,12 +70,11 @@ public class Model extends Observable {
     public void setRemitente(String remitente) {
         this.remitente = remitente;
     }
-    
 
     public void setMensaje(Message mensaje) {
         this.mensaje = mensaje;
     }
-    
+
     public List<Message> getMessages() {
         return messages;
     }
@@ -81,7 +82,7 @@ public class Model extends Observable {
     public void setMessages(List<Message> messages) {
         this.messages = messages;
     }
-      
+
     void commit() {
         this.mensaje = new Message();
         this.setChanged();
@@ -91,6 +92,6 @@ public class Model extends Observable {
     void setContacto(String nombre) {
         nombrePersona = nombre;
     }
-    
 
 }
+

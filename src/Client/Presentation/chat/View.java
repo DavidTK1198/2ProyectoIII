@@ -6,11 +6,9 @@
 package Client.Presentation.chat;
 
 import chatProtocol.Message;
-import java.awt.TextArea;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import javax.swing.JTextArea;
 
 /**
  *
@@ -151,10 +149,8 @@ public class View extends javax.swing.JDialog implements Observer {
         String dest = this.model.getNombrePersona();
         String remi = this.model.getRemitente();
         Message men = new Message(dest, remi, s);
-        this.model.getNuevoChat().addMsj(men);
-        this.control.getParent().post(men);
+        this.control.enviar(men);
         this.mensaje.setText("");
-        model.commit();
 
 
     }//GEN-LAST:event_enviarMouseClicked
@@ -185,7 +181,7 @@ public class View extends javax.swing.JDialog implements Observer {
                     flag = true;
                 }
 
-                if (flag ==false) {
+                if (flag == false) {
 
                     if (ms.getDestinatario().equals(this.control.getParent().getLoggedUser().getId()) && flag == false) {
                         kk += lmm.getRemitente() + ": " + lmm.getMensaje() + "               " + ms.getHora() + "\n";

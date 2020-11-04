@@ -68,6 +68,7 @@ public class Controller {
                 }
                 model.setMessages(cc.getMensajes());//falta mensajes
                 model.setContacto(c.getId());
+                model.setNuevoChat(cc);
                 break;
             }
         }
@@ -76,4 +77,14 @@ public class Controller {
         this.show();
         
     }
+
+    void enviar(Message men) {
+        this.model.getNuevoChat().addMsj(men);
+         User profi = (User) Session.instance().getAttribute(Session.USER_ATTRIBUTE);
+        this.Parent.post(men);
+      
+        model.commit();
+    }
 }
+
+

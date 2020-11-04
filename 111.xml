@@ -1,2 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<LocalData/>
+<LocalData>
+<Chat>
+<Contacto>hola</Contacto>
+<Mensajes>
+<Destinatario>hola</Destinatario>
+<Remitente>111</Remitente>
+<Mensaje>monas chinas</Mensaje>
+<Fecha>03/11/2020 18:03:05</Fecha>
+<Hora>18:03</Hora>
+<Destinatario>hola</Destinatario>
+<Remitente>111</Remitente>
+<Mensaje>encueradas</Mensaje>
+<Fecha>03/11/2020 18:03:14</Fecha>
+<Hora>18:03</Hora>
+<Destinatario>hola</Destinatario>
+<Remitente>111</Remitente>
+<Mensaje>x10000</Mensaje>
+<Fecha>03/11/2020 18:03:53</Fecha>
+<Hora>18:03</Hora>
+</Mensajes>
+</Chat>
+</LocalData>
