@@ -14,7 +14,7 @@ import Client.Application.Session;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 //import java.util.List;
-import javafx.scene.chart.PieChart.Data;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
@@ -73,12 +73,12 @@ public class XmlPersister {
 
     }
 
-    public Data restore() throws Exception {
+    public Session restore() throws Exception {
         
         JAXBContext jaxbContext = JAXBContext.newInstance(Session.class);
         FileInputStream is = new FileInputStream(path);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-        Data result = (Data) unmarshaller.unmarshal(is);
+        Session result = (Session) unmarshaller.unmarshal(is);
         is.close();
         return result;
     }
@@ -243,6 +243,7 @@ public class XmlPersister {
 
 
 }
+
 
 
 

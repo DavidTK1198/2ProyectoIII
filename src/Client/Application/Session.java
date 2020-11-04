@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Session {
      @XmlTransient
    private static Session theInstance;
-   @XmlTransient
+  
    private List<Chat> lc;
     public static Session instance(){
         if (theInstance==null){ 
@@ -32,7 +32,7 @@ public class Session {
         }
         return theInstance;
     }    
-     
+      @XmlTransient
     HashMap<String,Object> attributes;
 
     public Session() {
@@ -68,6 +68,8 @@ public class Session {
      @XmlTransient
     public static String USER_ATTRIBUTE="user";
 }
+
+
 
 
 
