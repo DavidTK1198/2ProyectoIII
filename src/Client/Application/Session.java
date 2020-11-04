@@ -10,13 +10,21 @@ import Client.Logic.Chat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * 
  * @author DavidTK1198
  */
+@XmlRootElement()
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Session {
+     @XmlTransient
    private static Session theInstance;
+   @XmlTransient
    private List<Chat> lc;
     public static Session instance(){
         if (theInstance==null){ 
@@ -24,7 +32,7 @@ public class Session {
         }
         return theInstance;
     }    
-    
+     
     HashMap<String,Object> attributes;
 
     public Session() {
@@ -57,5 +65,12 @@ public class Session {
     public List<Chat> getLC(){
         return this.lc;
     }
+     @XmlTransient
     public static String USER_ATTRIBUTE="user";
 }
+
+
+
+
+
+

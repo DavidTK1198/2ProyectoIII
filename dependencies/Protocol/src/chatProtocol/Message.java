@@ -8,18 +8,25 @@ package chatProtocol;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author DavidTK1198
  */
-public class Message implements Serializable {
 
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Message implements Serializable {
+    @XmlID
     String fecha;
     String destinatario;
     String Remitente;
     String mensaje;
     String hora;
+     @XmlTransient
     Date date;
 
     public String getFecha() {
@@ -50,6 +57,7 @@ public class Message implements Serializable {
         this.destinatario = "";
         this.Remitente = "";
         this.mensaje = "";
+        this.hora="";
     }
 
     @Override
@@ -86,3 +94,5 @@ public class Message implements Serializable {
     
 
 }
+
+

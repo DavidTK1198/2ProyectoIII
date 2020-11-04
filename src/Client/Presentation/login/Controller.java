@@ -9,8 +9,6 @@ import Client.Application.Session;
 import Client.Data.XmlPersister;
 import chatProtocol.Message;
 import chatProtocol.User;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -84,9 +82,14 @@ public class Controller {
 
         User s = ServiceProxy.instance().login(profi);
         Session.instance().setAttibute(Session.USER_ATTRIBUTE, s);
-     
-        
+
         model.setCurrentUser(s);
+        try {
+            XmlPersister.getInstance().setPath(model.getCurrentUser().getId() + ".xml");
+            XmlPersister.getInstance().restore();
+        } catch (Exception e) {
+
+        }
         this.Hide();
         this.MainShow();
         model.commit();
@@ -116,20 +119,18 @@ public class Controller {
 
     public void logout() {
         try {
+
             ServiceProxy.instance().logout(model.getCurrentUser());
-            
+
+            XmlPersister.getInstance().store(Session.instance());
+
         } catch (Exception ex) {
         }
 
-        
-        try {
-          
-        } catch (Exception ex) {
-             JOptionPane.showMessageDialog(null, "ERROR AL GUARDAR LOS DATOS");
-        }
         model.setCurrentUser(null);
 
         model.commit();
+
         Session.instance().removeAttribute(Session.USER_ATTRIBUTE);
         this.Main_Close();
         this.show();
@@ -180,7 +181,5 @@ public class Controller {
     }
 
 }
-
-
 
 

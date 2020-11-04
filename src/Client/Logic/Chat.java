@@ -8,13 +8,19 @@ package Client.Logic;
 import chatProtocol.Message;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlID;
 
 /**
  *
  * @author DavidTK119
+ *
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Chat {
 
+    @XmlID
     private String idContacto;
     private List<Message> mensajes;
 
@@ -43,8 +49,10 @@ public class Chat {
         this.idContacto = "";
         this.mensajes = new ArrayList<>();
     }
-    public void addMsj(Message men){
+
+    public void addMsj(Message men) {
         mensajes.add(men);
     }
 
 }
+

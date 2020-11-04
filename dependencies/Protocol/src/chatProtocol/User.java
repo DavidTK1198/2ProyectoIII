@@ -6,9 +6,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlID;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 
 public class User implements Serializable {
-
+    @XmlID
     String id;
     String clave;
     private boolean estado;
@@ -20,6 +25,7 @@ public class User implements Serializable {
         this.id = "";
         estado = false;
         this.contacts=new HashMap<>();
+        this.Nombre="";
     }
 
     public User(String Nombre, String id, String clave) {
@@ -121,6 +127,8 @@ public class User implements Serializable {
     }
 
 }
+
+
 
 
 
