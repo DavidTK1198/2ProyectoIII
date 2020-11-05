@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<session>
+    <lc>
+        <idContacto>222</idContacto>
+        <mensajes>
+            <fecha>03/11/2020 23:51:58</fecha>
+            <destinatario>111</destinatario>
+            <Remitente>222</Remitente>
+            <mensaje>sdfdsfsd</mensaje>
+            <hora>23:51</hora>
+        </mensajes>
+        <mensajes>
+            <fecha>03/11/2020 23:52:24</fecha>
+            <destinatario>222</destinatario>
+            <Remitente>111</Remitente>
+            <mensaje>Hola, soy 111</mensaje>
+            <hora>23:52</hora>
+        </mensajes>
+        <mensajes>
+            <fecha>03/11/2020 23:52:50</fecha>
+            <destinatario>111</destinatario>
+            <Remitente>222</Remitente>
+            <mensaje>Que ise bruh</mensaje>
+            <hora>23:52</hora>
+        </mensajes>
+        <mensajes>
+            <fecha>05/11/2020 10:44:16</fecha>
+            <destinatario>222</destinatario>
+            <Remitente>111</Remitente>
+            <mensaje>a</mensaje>
+            <hora>10:44</hora>
+        </mensajes>
+        <mensajes>
+            <fecha>05/11/2020 10:46:45</fecha>
+            <destinatario>222</destinatario>
+            <Remitente>111</Remitente>
+            <mensaje>f</mensaje>
+            <hora>10:46</hora>
+        </mensajes>
+        <mensajes>
+            <fecha>05/11/2020 10:47:21</fecha>
+            <destinatario>222</destinatario>
+            <Remitente>111</Remitente>
+            <mensaje>q</mensaje>
+            <hora>10:47</hora>
+        </mensajes>
+    </lc>
+</session>

@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -28,6 +29,8 @@ public class View extends javax.swing.JDialog implements Observer {
         super(parent, modal);
         initComponents();
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        this.TContacts.setRowHeight(35);
+        this.TContacts.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
     }
 
