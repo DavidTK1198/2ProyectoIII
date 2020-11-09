@@ -357,8 +357,8 @@ public class View extends javax.swing.JDialog implements Observer {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AgrContMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AgrContMouseClicked
-        String nombreContacto = this.NomC.getText();
-        String cedula = this.IDCont.getText();
+        String nombreContacto = this.IDCont.getText();
+        String cedula = this.NomC.getText();
         try {
             if ("".equals(cedula) || "".equals(nombreContacto)) {
                 throw new Exception("Datos incompletos");

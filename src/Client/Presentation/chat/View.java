@@ -158,7 +158,7 @@ public class View extends javax.swing.JDialog implements Observer {
      */
     public void setTextos() {
         boolean flag = false;
-        List<Message> lm = model.getMessages();
+        List<Message> lm = model.getNuevoChat().getMensajes();
         if (lm.isEmpty()) {
             return;
         } else {
