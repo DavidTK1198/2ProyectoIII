@@ -52,6 +52,7 @@ public class Controller {
     }
 
     public void deliver(Message message) {
+        
         model.getNuevoChat().addMsj(message);
         model.commit();
     }

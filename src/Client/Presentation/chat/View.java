@@ -157,7 +157,7 @@ public class View extends javax.swing.JDialog implements Observer {
      * @param args the command line arguments
      */
     public void setTextos() {
-        boolean flag = false;
+        /*boolean flag = false;
         List<Message> lm = model.getNuevoChat().getMensajes();
         if (lm.isEmpty()) {
             return;
@@ -183,6 +183,8 @@ public class View extends javax.swing.JDialog implements Observer {
             }
             this.AreaTexto.setText(kk);
         }
+    */
+        this.AreaTexto.setText(model.getNuevoChat().mostrarConversacion());
 
     }
 

@@ -19,7 +19,6 @@ import java.util.Observer;
 public class Model extends Observable {
 
     List<Message> messages;
-    ;
     Chat nuevoChat;
     Message mensaje;
     String nombrePersona;
@@ -83,15 +82,16 @@ public class Model extends Observable {
         this.messages = messages;
     }
 
-    void commit() {
+    public void commit() {
         this.mensaje = new Message();
         this.setChanged();
         this.notifyObservers();
     }
 
-    void setContacto(String nombre) {
+    public void setContacto(String nombre) {
         nombrePersona = nombre;
     }
+
 
 }
 

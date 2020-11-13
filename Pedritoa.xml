@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<session>
+    <lc>
+        <idContacto>Pedrito</idContacto>
+        <mensajes>
+            <fecha>13/11/2020 09:27:55</fecha>
+            <destinatario>Pedritoa</destinatario>
+            <Remitente>Pedrito</Remitente>
+            <mensaje>Hola pedritoa</mensaje>
+            <hora>09:27</hora>
+        </mensajes>
+        <mensajes>
+            <fecha>13/11/2020 09:28:15</fecha>
+            <destinatario>Pedritoa</destinatario>
+            <Remitente>Pedrito</Remitente>
+            <mensaje>como estas pedritoa</mensaje>
+            <hora>09:28</hora>
+        </mensajes>
+        <mensajes>
+            <fecha>13/11/2020 09:28:29</fecha>
+            <destinatario>Pedrito</destinatario>
+            <Remitente>Pedritoa</Remitente>
+            <mensaje>todo bien y usted pedrito</mensaje>
+            <hora>09:28</hora>
+        </mensajes>
+    </lc>
+</session>

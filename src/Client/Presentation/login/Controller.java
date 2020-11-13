@@ -163,9 +163,11 @@ public class Controller {
 
     public void deliver(Message message) {
 
-        this.control_chat.deliver(message);
-        if (!this.control_View.isShowing()) {
-            JOptionPane.showMessageDialog(null, "Mensaje recibido de: " + message.getRemitente());
+        if (message.getDestinatario().equals(model.getCurrentUser().getId())) {
+            this.control_chat.deliver(message);
+            if (!this.control_View.isShowing()) {
+                JOptionPane.showMessageDialog(null, "Mensaje recibido de: " + message.getRemitente());
+            }
         }
     }
 

@@ -91,6 +91,9 @@ public class Message implements Serializable {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
+    public String toString2(){
+        return this.Remitente + ": "+this.mensaje + "  "+ this.hora + "\n";
+    }
     
 
 }

@@ -53,6 +53,13 @@ public class Chat {
     public void addMsj(Message men) {
         mensajes.add(men);
     }
+    public String mostrarConversacion(){
+        String conversacion = "";
+        for(Message ms: mensajes){
+            conversacion+= ms.toString2();
+        }
+        return conversacion;
+    }
 
 }
 
